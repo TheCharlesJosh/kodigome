@@ -17,6 +17,49 @@ console.log(
 )
 ```
 
-Then I copied everything in a text file.
+Then I copied everything in a text file (links.txt).
 
 I'm sure there's a more efficient way to do it, but this got the job done.
+
+This wget script then downloads it per folder.
+
+```bash
+wget -i links.txt \
+    --force-directories \
+    --no-host-directories \
+    --cut-dirs=3 \
+    --no-clobber \
+    --continue \
+    --progress=bar \
+    --show-progress \
+    --tries=3 \
+    --timeout=15
+```
+
+Unfortunately, I only downloaded 1657 out of 1682 (25 were missing). I listed the files I downloaded through:
+
+```
+find . | grep -E '.pdf$' > download.txt
+```
+
+Check for missing:
+
+```
+grep -xvFf download-relative-sorted.txt  links-relative-sorted.txt > missing-raw.txt
+```
+
+Fixing them required manually checking the website again (maybe someone from COMELEC had a copy-paste error in their Excel sheets?).
+
+Common issues were:
+
+- Fixable: Wrong province (BENGUET instead of KALINGA or IFUGAO)
+- Do nothing: Ñ url encoded to %C3%91 but it still exists
+- Fixable: Province was missing (SAN_JOAQUIN required to be renamed as ILOILO/SAN_JOAQUIN)
+- Fixable: Misspelling (CARANGLAN instead of CARRANGLAN)
+
+I cannot fix the following:
+
+- CAPIZ/DUMARAO
+- ILOILO/DUENAS
+
+I requested for these via email in the meantime.
