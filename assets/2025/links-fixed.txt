@@ -103,11 +103,11 @@ https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/IFUGA
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/BALBALAN.pdf
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/LUBUAGAN.pdf
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/PASIL.pdf
-https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/IFUGAO/PINUKPUK.pdf
-https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/IFUGAO/RIZAL.pdf
+https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/PINUKPUK.pdf
+https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/RIZAL.pdf
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/CITYOFTABUK.pdf
-https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/IFUGAO/TANUDAN.pdf
-https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/IFUGAO/TINGLAYAN.pdf
+https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/TANUDAN.pdf
+https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/KALINGA/TINGLAYAN.pdf
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/MPROVINCE/BARLIG.pdf
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/MPROVINCE/BAUKO.pdf
 https://comelec.gov.ph/php-tpls-attachments/2025NLE/2025BallotFace/BFT_CAR/MPROVINCE/BESAO.pdf

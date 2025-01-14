@@ -17,7 +17,7 @@ console.log(
 )
 ```
 
-Then I copied everything in a text file (links.txt).
+Then I copied everything in a text file (`links.txt`).
 
 I'm sure there's a more efficient way to do it, but this got the job done.
 
@@ -36,16 +36,16 @@ wget -i links.txt \
     --timeout=15
 ```
 
-Unfortunately, I only downloaded 1657 out of 1682 (25 were missing). I listed the files I downloaded through:
+Unfortunately, I only downloaded 1657 out of 1681 (25 were missing). I listed the files I downloaded through:
 
 ```
-find . | grep -E '.pdf$' > download.txt
+find . | grep -E '.pdf$' > downloaded.txt
 ```
 
 Check for missing:
 
 ```
-grep -xvFf download-relative-sorted.txt  links-relative-sorted.txt > missing-raw.txt
+grep -xvFf downloaded-relative-sorted.txt  links-relative-sorted.txt > missing-raw.txt
 ```
 
 Fixing them required manually checking the website again (maybe someone from COMELEC had a copy-paste error in their Excel sheets?).
@@ -62,4 +62,22 @@ I cannot fix the following:
 - CAPIZ/DUMARAO
 - ILOILO/DUENAS
 
-I requested for these via email in the meantime.
+I requested for these via email, and they responded. We now have a complete set of ballots (`links-fixed.txt`).
+
+## Processing the PDFs to JSONs
+
+I will have the processing done via Jupyter Notebooks set up with a Deno runtime so that I can switch between Python and Node.js whenever necessary.
+
+On this folder, set up the virtual env with:
+
+```python
+python -m venv notebook
+.\notebook\Scripts\activate
+deno jupyter --unstable-bare-node-builtins --unstable-byonm --install
+pip install notebook
+python -m jupyter notebook
+```
+
+Install pymupdf4llm with `pip install pymupdf4llm`
+
+PymuPDF4LLM will make the parsing easier through Markdown tables.
