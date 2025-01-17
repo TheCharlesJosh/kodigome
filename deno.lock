@@ -2,13 +2,15 @@
   "version": "4",
   "redirects": {
     "https://deno.land/std/html/mod.ts": "https://deno.land/std@0.224.0/html/mod.ts",
-    "https://deno.land/x/display/mod.ts": "https://deno.land/x/display@v1.1.2/mod.ts"
+    "https://deno.land/x/display/mod.ts": "https://deno.land/x/display@v1.1.2/mod.ts",
+    "https://deno.land/x/fastest_levenshtein/mod.ts": "https://deno.land/x/fastest_levenshtein@1.0.10/mod.ts"
   },
   "remote": {
     "https://deno.land/std@0.224.0/html/entities.ts": "fd5ac9d459355a377baea118f4e808a1268808fd9138b319c90f11024e2f1718",
     "https://deno.land/std@0.224.0/html/mod.ts": "047624f883874f4b9781da872f9579a615fb5418af30663c9ce0c65074ace87f",
     "https://deno.land/x/display@v1.1.2/format.ts": "1ba3b8c5c1afdae558095479254f2dcef84d8fcd24464ebdd44f65d99e0b0b9e",
-    "https://deno.land/x/display@v1.1.2/mod.ts": "077bedee868852e0f220763d6781d8bcc077f68f0e3269a60e02e93a42c54b70"
+    "https://deno.land/x/display@v1.1.2/mod.ts": "077bedee868852e0f220763d6781d8bcc077f68f0e3269a60e02e93a42c54b70",
+    "https://deno.land/x/fastest_levenshtein@1.0.10/mod.ts": "aea49d54b6bb37082b2377da2ea068331da07b2a515621d8eff97538b7157b40"
   },
   "workspace": {
     "packageJson": {
@@ -20,6 +22,7 @@
         "npm:eslint-config-next@15.1.4",
         "npm:eslint@9",
         "npm:next@15.1.4",
+        "npm:nodejs-polars@0.17",
         "npm:postcss@8",
         "npm:react-dom@19",
         "npm:react@19",
