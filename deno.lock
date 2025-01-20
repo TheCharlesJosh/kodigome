@@ -21,6 +21,7 @@
         "npm:@types/react@19",
         "npm:eslint-config-next@15.1.4",
         "npm:eslint@9",
+        "npm:fastest-levenshtein@^1.0.16",
         "npm:next@15.1.4",
         "npm:nodejs-polars@0.17",
         "npm:postcss@8",
