@@ -1,0 +1,11 @@
+.linkBox {
+  a:where(:not(.linkOverlay)),
+  button:where(:not(.linkOverlay)) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.linkOverlay {
+  z-index: auto;
+}
