@@ -6,14 +6,14 @@ import {
   // SetStateAction
 } from "react";
 import { FieldValues, UseFormReset } from "react-hook-form";
-import { StartOverButton } from "./StartOverButton";
+import { StartOverButton } from "./start-over-button";
 import logo from "@assets/logo.svg";
-import { SaveShareButton } from "./SaveShareButton";
+import { SaveShareButton } from "./save-share-button";
 // import { LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { LinkBox, LinkOverlay } from "./LinkOverlay";
 import { Instructions } from "./Instructions";
 import { IS_DEVELOPMENT } from "@lib/constants";
-import { SidebarLinks } from "./SidebarLinks";
+import { SidebarLinks } from "./sidebar-links";
 import { CandidateGroupValues } from "@/lib/CandidateTypes";
 
 export const SidebarRedux = ({
@@ -40,7 +40,7 @@ export const SidebarRedux = ({
         )}
       >
         <LinkOverlay href="/">
-          <h1 className="sr-only">kodigo.me</h1>
+          <h2 className="sr-only">kodigo.me</h2>
           <Image
             src={logo}
             width={300}
@@ -49,12 +49,12 @@ export const SidebarRedux = ({
           />
         </LinkOverlay>
       </LinkBox>
-      <h2 className="text-base font-semibold uppercase tracking-wide text-indigo-600">
+      <h3 className="text-base font-semibold uppercase tracking-wide text-indigo-600">
         Create Your Own Election Kodigo
-      </h2>
-      <h2 className="text-sm uppercase tracking-wide">
+      </h3>
+      <h3 className="text-sm uppercase tracking-wide">
         May 9, 2022 National and Local Elections
-      </h2>
+      </h3>
       {!mainLogoVisible && (pageType === "main" || pageType === "share") && (
         <Instructions isSidebar={true} />
       )}
@@ -102,7 +102,7 @@ const Sidebar = ({
         )}
       >
         <LinkOverlay href="/">
-          <h1 className="sr-only">kodigo.me</h1>
+          <h2 className="sr-only">kodigo.me</h2>
           <Image
             src={logo}
             width={300}
@@ -111,12 +111,12 @@ const Sidebar = ({
           />
         </LinkOverlay>
       </LinkBox>
-      <h2 className="text-base font-semibold uppercase tracking-wide text-indigo-600">
+      <h3 className="text-base font-semibold uppercase tracking-wide text-indigo-600">
         Create Your Own Election Kodigo
-      </h2>
-      <h2 className="text-sm uppercase tracking-wide">
+      </h3>
+      <h3 className="text-sm uppercase tracking-wide">
         May 9, 2022 National and Local Elections
-      </h2>
+      </h3>
       {(pageType === "main" || pageType === "share") && (
         <div className={clsx("my-4", ballotVisible ? "block" : "hidden")}>
           <div className="flex w-full flex-col justify-center gap-2 p-2">

@@ -15,15 +15,6 @@ export const WebShareButton = ({
     files: [] as File[],
     url: link,
   };
-
-  // const [isNativeShare, setNativeShare] = useState(false)
-  // useEffect(() => {
-  //   //  setPageURL(window.location.href)
-  //   if (navigator.share) {
-  //     setNativeShare(true)
-  //   }
-  // }, [])
-
   const handleClick = async (_event: MouseEvent) => {
     const file = new File([blob as BlobPart], "kodigo-me.png", {
       type: "image/png",
@@ -43,7 +34,6 @@ export const WebShareButton = ({
 
   if (navigator.canShare(shareData) && blob) {
     return (
-      // <WhiteButtonBase message="Share" onClick={handleClick} Icon={ShareIcon} />
       <HiDotsHorizontal
         className="-mt-px h-8 w-8 cursor-pointer rounded-full bg-gray-400 text-white"
         aria-hidden="true"

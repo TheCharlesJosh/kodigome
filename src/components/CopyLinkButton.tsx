@@ -4,7 +4,7 @@ import { useCopyToClipboard } from "react-use";
 // import { useClipboard } from '@chakra-ui/react'
 // import { LinkIcon } from '@heroicons/react/outline'
 import { HiLink } from "react-icons/hi";
-import { WhiteButtonBase } from "./WhiteButtonBase";
+import { WhiteButtonBase } from "./white-button-base";
 
 export const CopyLinkButton = ({
   textToClipBoard,

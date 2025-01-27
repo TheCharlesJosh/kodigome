@@ -4,7 +4,7 @@ import { LinkBox, LinkOverlay } from "@components/LinkOverlay";
 import logo from "../assets/logo.svg";
 import Image from "next/image";
 import clsx from "clsx";
-import { ValueProp } from "./ValueProp";
+import { ValueProp } from "./value-prop";
 import { RefObject } from "react";
 
 export const UpperHeader = ({

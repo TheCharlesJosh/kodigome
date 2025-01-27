@@ -1,4 +1,3 @@
-// import { SaveIcon } from '@heroicons/react/solid'
 import { HiSave } from "react-icons/hi";
 import { BaseSyntheticEvent, MouseEvent, useState } from "react";
 import { ShareDialog } from "./ShareDialog";
@@ -18,14 +17,10 @@ export const SaveShareButton = ({
     setOpenModal(true);
     try {
       await onSubmit(event);
-      // console.log(responseData)
-      // setSaveKey(responseData.id)
     } catch (error: unknown) {
       console.error(error);
     }
   }
-  // console.log(toBase64(shimmer(700, 700)))
-  // console.log(cachedImageURL)
   return (
     <>
       <button
