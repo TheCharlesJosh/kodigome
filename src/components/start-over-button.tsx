@@ -1,5 +1,4 @@
 import { HiRefresh } from "react-icons/hi";
-// import { HiRefresh } from '@heroicons/react/solid'
 import { MouseEvent, useState } from "react";
 import { FieldValues, UseFormReset } from "react-hook-form";
 import SimpleModal from "./SimpleModal";

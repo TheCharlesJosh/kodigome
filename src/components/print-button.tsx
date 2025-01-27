@@ -1,7 +1,7 @@
 "use client";
 import prntr from "prntr";
 import { HiOutlinePrinter, HiOutlineRefresh } from "react-icons/hi";
-import { WhiteButtonBase } from "./WhiteButtonBase";
+import { WhiteButtonBase } from "./white-button-base";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -16,7 +16,6 @@ export const PrintButton = ({
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const handleClick = () => {
-    // if (pdfURL && window.print)
     if (pdfURL)
       prntr({
         printable: pdfURL,
@@ -39,10 +38,8 @@ export const PrintButton = ({
         },
       });
   };
-  // if (window.print) {
   return (
     <>
-      {/* <ToastContainer /> */}
       <WhiteButtonBase
         message="Print"
         onClick={handleClick}
@@ -50,5 +47,4 @@ export const PrintButton = ({
       />
     </>
   );
-  // } else return <></>
 };

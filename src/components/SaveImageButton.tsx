@@ -1,6 +1,6 @@
 "use client";
 import FileSaver from "file-saver";
-import { WhiteButtonBase } from "./WhiteButtonBase";
+import { WhiteButtonBase } from "./white-button-base";
 import { useState } from "react";
 // import { PhotographIcon } from '@heroicons/react/solid'
 // import { RefreshIcon } from '@heroicons/react/outline'

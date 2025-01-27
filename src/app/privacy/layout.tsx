@@ -1,12 +1,11 @@
 "use client";
 import { UpperHeader } from "@/components/UpperHeader";
 import Footer from "@components/Footer";
-import PrivacyMain from "@/app/privacy/contents";
 import { SidebarRedux } from "@components/Sidebar";
-import { RefObject, useEffect, useRef } from "react";
+import { ReactNode, RefObject, useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
 
-export default function Privacy() {
+export default function MdxLayout({ children }: { children: ReactNode }) {
   const mainLogoRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
   const mainLogoIntersection = useIntersection(mainLogoRef, {
     root: null,
@@ -16,15 +15,6 @@ export default function Privacy() {
   const mainLogoVisible = Boolean(
     mainLogoIntersection && mainLogoIntersection.intersectionRatio === 1
   );
-
-  useEffect(() => {
-    if (mainLogoIntersection)
-      console.log(
-        mainLogoIntersection,
-        mainLogoIntersection.intersectionRatio,
-        mainLogoVisible
-      );
-  }, [mainLogoIntersection, mainLogoVisible]);
 
   return (
     <div className="bg-white">
@@ -40,7 +30,7 @@ export default function Privacy() {
             mainLogoRef={mainLogoRef}
             sharePage={false}
           />
-          <PrivacyMain />
+          {children}
           <Footer />
         </div>
       </div>
