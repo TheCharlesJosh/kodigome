@@ -4,20 +4,14 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import SimpleModal from "./SimpleModal";
 import { toBase64, shimmer } from "../lib/loadingHelpers";
-import { PrintButton } from "./PrintButton";
+import { PrintButton } from "./print-button";
 import { SaveImageButton } from "./SaveImageButton";
-import { WebShareButton } from "./WebShareButton";
-// import {
-//   HiOutlineClipboardCopy,
-//   HiOutlineInformationCircle,
-//   HiOutlineLink,
-// } from '@heroicons/react/outline'
+import { WebShareButton } from "./web-share-button";
 import {
   HiOutlineClipboardCopy,
   HiOutlineInformationCircle,
   HiOutlineLink,
 } from "react-icons/hi";
-// import { useClipboard } from '@chakra-ui/react'
 import { useCopyToClipboard } from "react-use";
 import {
   FacebookShareButton,
@@ -31,7 +25,6 @@ import {
   ViberShareButton,
   ViberIcon,
 } from "react-share";
-// import emo from '../lib/emo'
 import { BASE_URL, cloudinaryLoader } from "../lib/constants";
 import CopyPasteKodigo from "./CopyPasteKodigo";
 

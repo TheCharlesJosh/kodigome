@@ -13,7 +13,7 @@ import { ShareContents } from "./ShareDialog";
 import { LinkBox, LinkOverlay } from "./LinkOverlay";
 import { Instructions } from "./Instructions";
 import Link from "next/link";
-import { ValueProp } from "./ValueProp";
+import { ValueProp } from "./value-prop";
 
 const UpperFold = ({
   // mainLogoVisible,

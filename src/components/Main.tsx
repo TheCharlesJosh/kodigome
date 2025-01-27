@@ -1,6 +1,6 @@
 import { NationalCandidates } from "./NationalCandidates";
 import { LocalCandidates } from "./LocalCandidates";
-import { SaveShareButton } from "./SaveShareButton";
+import { SaveShareButton } from "./save-share-button";
 import { FieldValues, UseFormReset } from "react-hook-form";
 import {
   BaseSyntheticEvent,
@@ -8,7 +8,7 @@ import {
   RefObject,
   // SetStateAction
 } from "react";
-import { StartOverButton } from "./StartOverButton";
+import { StartOverButton } from "./start-over-button";
 
 import UpperFold from "./UpperFold";
 // import { InView } from 'react-intersection-observer'

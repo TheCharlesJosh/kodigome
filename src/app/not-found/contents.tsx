@@ -1,31 +1,25 @@
-// import { FieldValues, UseFormReset } from 'react-hook-form'
-import {
-  // BaseSyntheticEvent,
-  Dispatch,
-  SetStateAction,
-} from "react";
-// import MarkdownWrapper from './MarkdownWrapper'
-import { UpperHeader } from "./UpperHeader";
-// import { Disclosure } from '@headlessui/react'
-// import { ChevronDownIcon } from '@heroicons/react/outline'
-// import clsx from 'clsx'
+"use client";
+import { RefObject, useEffect, useRef } from "react";
+import { UpperHeader } from "../../components/UpperHeader";
 import Link from "next/link";
+import { useIntersection } from "react-use";
 
-const Main = ({
-  setMainLogoVisible,
-  sharePage = false,
-}: {
-  setMainLogoVisible: Dispatch<SetStateAction<boolean>>;
-  sharePage?: boolean;
-}) => {
-  function handleVisibility(inView: boolean) {
-    setMainLogoVisible(inView);
-  }
+export default function NotFoundContents() {
+  const mainLogoRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
+  const mainLogoIntersection = useIntersection(mainLogoRef, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1,
+  });
+  // const mainLogoVisible = Boolean(
+  //   mainLogoIntersection && mainLogoIntersection.intersectionRatio === 1
+  // );
+
   return (
     <>
       <UpperHeader
-        handleVisibility={handleVisibility}
-        sharePage={sharePage}
+        mainLogoRef={mainLogoRef}
+        sharePage={false}
       />
       <div className="flex flex-col bg-white">
         <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-4 sm:px-6 lg:px-8">
@@ -34,9 +28,9 @@ const Main = ({
               <p className="text-sm font-semibold uppercase tracking-wide text-indigo-600">
                 404 error
               </p>
-              <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+              <h2 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
                 Page not found.
-              </h1>
+              </h2>
               <p className="mt-2 text-base text-gray-500">
                 Sorry, we couldn’t find the page you’re looking for.
               </p>
@@ -54,6 +48,4 @@ const Main = ({
       </div>
     </>
   );
-};
-
-export default Main;
+}
