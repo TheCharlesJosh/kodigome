@@ -10,7 +10,7 @@ import { HiOutlineArrowDown, HiOutlineInformationCircle } from "react-icons/hi";
 // import { ArrowDownIcon, InformationCircleIcon } from '@heroicons/react/outline'
 import clsx from "clsx";
 import { ShareContents } from "./ShareDialog";
-import { LinkBox, LinkOverlay } from "./LinkOverlay";
+import { LinkBox, LinkOverlay } from "./link-overlay";
 import { Instructions } from "./Instructions";
 import Link from "next/link";
 import { ValueProp } from "./value-prop";

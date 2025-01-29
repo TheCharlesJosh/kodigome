@@ -1,7 +1,7 @@
 "use client";
 import { UpperHeader } from "@/components/UpperHeader";
 import Footer from "@components/Footer";
-import { SidebarRedux } from "@components/Sidebar";
+import { SidebarRedux } from "@components/sidebar/sidebar";
 import { ReactNode, RefObject, useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
 

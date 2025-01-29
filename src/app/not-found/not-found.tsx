@@ -1,6 +1,6 @@
 "use client";
 import Footer from "@/components/Footer";
-import { SidebarRedux } from "@/components/Sidebar";
+import { SidebarRedux } from "@/components/sidebar/sidebar";
 import { useRef, RefObject, useEffect } from "react";
 import { useIntersection } from "react-use";
 
