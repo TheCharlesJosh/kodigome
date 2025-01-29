@@ -1,6 +1,6 @@
 // import { TextLoop } from 'react-text-loop-next'
 // import { InView } from 'react-intersection-observer'
-import { LinkBox, LinkOverlay } from "@components/LinkOverlay";
+import { LinkBox, LinkOverlay } from "@/components/link-overlay";
 import logo from "../assets/logo.svg";
 import Image from "next/image";
 import clsx from "clsx";

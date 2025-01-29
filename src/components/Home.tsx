@@ -1,5 +1,5 @@
 "use client";
-import Sidebar from "./Sidebar";
+import Sidebar from "@/components/sidebar/sidebar";
 import Main from "./Main";
 import Footer from "./Footer";
 import { useForm, FormProvider, useFormState } from "react-hook-form";

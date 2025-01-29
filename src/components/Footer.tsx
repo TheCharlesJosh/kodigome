@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { IS_DEVELOPMENT } from "../lib/constants";
-import { SidebarLinks } from "./sidebar-links";
+import { SidebarLinks } from "./sidebar/sidebar-links";
 import { CandidateGroupValues } from "@/lib/CandidateTypes";
 
 const Footer = ({ peek }: { peek?: CandidateGroupValues }) => {

@@ -1,19 +1,14 @@
 import Image from "next/image";
 import clsx from "clsx";
-import {
-  BaseSyntheticEvent,
-  // Dispatch,
-  // SetStateAction
-} from "react";
+import { BaseSyntheticEvent } from "react";
 import { FieldValues, UseFormReset } from "react-hook-form";
-import { StartOverButton } from "./start-over-button";
+import { StartOverButton } from "@/components/start-over-button";
 import logo from "@assets/logo.svg";
-import { SaveShareButton } from "./save-share-button";
-// import { LinkBox, LinkOverlay } from '@chakra-ui/react'
-import { LinkBox, LinkOverlay } from "./LinkOverlay";
-import { Instructions } from "./Instructions";
+import { SaveShareButton } from "@/components/save-share-button";
+import { LinkBox, LinkOverlay } from "@/components/link-overlay";
+import { Instructions } from "@/components/Instructions";
 import { IS_DEVELOPMENT } from "@lib/constants";
-import { SidebarLinks } from "./sidebar-links";
+import { SidebarLinks } from "@/components/sidebar/sidebar-links";
 import { CandidateGroupValues } from "@/lib/CandidateTypes";
 
 export const SidebarRedux = ({
@@ -23,12 +18,6 @@ export const SidebarRedux = ({
   pageType?: string;
   mainLogoVisible: boolean;
 }) => {
-  // const [openModal, setOpenModal] = useState<boolean>(false)
-
-  // function handleSubmit(event: MouseEvent) {
-  //   setOpenModal(true)
-  //   onSubmit(event)
-  // }
   return (
     <>
       <LinkBox
@@ -36,7 +25,6 @@ export const SidebarRedux = ({
         className={clsx(
           "transition-opacity",
           mainLogoVisible ? "opacity-0" : "opacity-100"
-          // pageType !== 'main' && pageType !== 'share' && 'opacity-100'
         )}
       >
         <LinkOverlay href="/">
@@ -81,16 +69,8 @@ const Sidebar = ({
   saveKey: string | null;
   pageType?: string;
   mainLogoVisible: boolean;
-  // setMainLogoVisible: Dispatch<SetStateAction<boolean>>
   ballotVisible: boolean;
-  // setBallotVisible: Dispatch<SetStateAction<boolean>>
 }) => {
-  // const [openModal, setOpenModal] = useState<boolean>(false)
-
-  // function handleSubmit(event: MouseEvent) {
-  //   setOpenModal(true)
-  //   onSubmit(event)
-  // }
   return (
     <>
       <LinkBox
@@ -98,7 +78,6 @@ const Sidebar = ({
         className={clsx(
           "transition-opacity",
           mainLogoVisible ? "opacity-0" : "opacity-100"
-          // pageType !== 'main' && pageType !== 'share' && 'opacity-100'
         )}
       >
         <LinkOverlay href="/">
