@@ -1,8 +1,8 @@
 "use client";
-import { UpperHeader } from "@/components/UpperHeader";
-import Footer from "@components/Footer";
+import { UpperHeader } from "@/components/upper-header";
+import Footer from "@/components/footer";
 import { SidebarRedux } from "@components/sidebar/sidebar";
-import { ReactNode, RefObject, useEffect, useRef } from "react";
+import { ReactNode, RefObject, useRef } from "react";
 import { useIntersection } from "react-use";
 
 export default function MdxLayout({ children }: { children: ReactNode }) {

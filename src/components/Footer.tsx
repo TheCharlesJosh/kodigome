@@ -29,35 +29,6 @@ const Footer = ({ peek }: { peek?: CandidateGroupValues }) => {
         </details>
       )}
     </div>
-    // <div className="my-8 text-center transition-colors">
-    //   <ul className="justify-center gap-8 md:inline-flex">
-    //     <li className="text-gray-400">
-    //       <Link href={'/'}>
-    //         <a className="cursor-pointer hover:text-indigo-600">
-    //           kodigo.me • 2022
-    //         </a>
-    //       </Link>
-    //     </li>
-    //     <li className="text-gray-400">
-    //       <Link href={'/faq'}>
-    //         <a className="cursor-pointer hover:text-indigo-600">FAQs</a>
-    //       </Link>
-    //     </li>
-    //     <li className="text-gray-400">
-    //       <Link href={'/privacy'}>
-    //         <a className="cursor-pointer hover:text-indigo-600">
-    //           Privacy Policy
-    //         </a>
-    //       </Link>
-    //     </li>
-    //     <li className="text-gray-400">
-    //       <Link href="https://www.facebook.com/kodigomeph">
-    //         <a className="cursor-pointer hover:text-indigo-600">Facebook</a>
-    //       </Link>
-    //     </li>
-    //     {/* <li>Acknowledgements</li> */}
-    //   </ul>
-    // </div>
   );
 };
 

@@ -1,5 +1,3 @@
-// import { TextLoop } from 'react-text-loop-next'
-// import { InView } from 'react-intersection-observer'
 import { LinkBox, LinkOverlay } from "@/components/link-overlay";
 import logo from "../assets/logo.svg";
 import Image from "next/image";
@@ -8,17 +6,14 @@ import { ValueProp } from "./value-prop";
 import { RefObject } from "react";
 
 export const UpperHeader = ({
-  // handleVisibility,
   mainLogoRef,
   sharePage,
 }: {
-  // handleVisibility: (inView: boolean) => void
   mainLogoRef: RefObject<HTMLDivElement | null>;
   sharePage: boolean;
 }) => {
   return (
     <div className="mb-4 flex w-full flex-col border-y-8 border-y-slate-300 bg-slate-200 py-8 xl:mt-0 xl:items-center xl:px-8">
-      {/* <InView as="div" onChange={handleVisibility}> */}
       <div ref={mainLogoRef}>
         <div className="flex flex-col justify-center">
           <div className="mx-auto w-52 xl:w-fit">
@@ -39,20 +34,6 @@ export const UpperHeader = ({
           </div>
 
           {!sharePage ? (
-            // <h2
-            //   className={clsx(
-            //     'mt-0 flex w-full flex-col items-center gap-x-2 text-base md:text-xl xl:mt-0 xl:flex-row'
-            //   )}
-            // >
-            //   <span className="">will help you </span>
-            //   <TextLoop>
-            //     <span className="font-bold">🗳 vote quicker on May 9.</span>
-            //     <span className="font-bold">
-            //       🤔 see your ballot ahead of time.
-            //     </span>
-            //     <span className="font-bold">📃 create your own kodigo.</span>
-            //   </TextLoop>
-            // </h2>
             <>
               <ValueProp />
 
@@ -73,7 +54,6 @@ export const UpperHeader = ({
           )}
         </div>
       </div>
-      {/* </InView> */}
     </div>
   );
 };

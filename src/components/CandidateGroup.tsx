@@ -1,22 +1,13 @@
 "use client";
 
-import {
-  // Fragment,
-  RefObject,
-  // UIEvent,
-  // UIEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import {
   HiRefresh as RefreshIcon,
   HiSearch as SearchIcon,
 } from "react-icons/hi";
 
-// import { RefreshIcon, SearchIcon } from '@heroicons/react/solid'
-import fuzzySearchStrings, { SearchResult } from "../lib/fuzzySearch";
+import fuzzySearchStrings, { SearchResult } from "../lib/fuzzy-search";
 import {
   FieldValues,
   useForm,
@@ -30,9 +21,6 @@ import {
   PositionEnum,
 } from "../lib/CandidateTypes";
 import startCase from "lodash.startcase";
-
-// import Lottie from 'react-lottie-player'
-// import scrollHint from '../public/animation/scrollHint.json'
 
 import { Scrollbar } from "react-scrollbars-custom";
 

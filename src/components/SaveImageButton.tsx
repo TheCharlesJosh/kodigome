@@ -2,8 +2,6 @@
 import FileSaver from "file-saver";
 import { WhiteButtonBase } from "./white-button-base";
 import { useState } from "react";
-// import { PhotographIcon } from '@heroicons/react/solid'
-// import { RefreshIcon } from '@heroicons/react/outline'
 import { HiOutlineRefresh, HiPhotograph } from "react-icons/hi";
 import { cloudinaryLoader } from "../lib/constants";
 

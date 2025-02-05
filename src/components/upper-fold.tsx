@@ -1,44 +1,29 @@
 import logo from "../assets/logo.svg";
 import Image from "next/image";
-// import { InView } from 'react-intersection-observer'
-import {
-  // Dispatch,
-  RefObject,
-  // SetStateAction
-} from "react";
+import { RefObject } from "react";
 import { HiOutlineArrowDown, HiOutlineInformationCircle } from "react-icons/hi";
-// import { ArrowDownIcon, InformationCircleIcon } from '@heroicons/react/outline'
 import clsx from "clsx";
 import { ShareContents } from "./ShareDialog";
 import { LinkBox, LinkOverlay } from "./link-overlay";
-import { Instructions } from "./Instructions";
+import { Instructions } from "./instructions";
 import Link from "next/link";
 import { ValueProp } from "./value-prop";
 
 const UpperFold = ({
-  // mainLogoVisible,
-  // setMainLogoVisible,
   mainLogoRef,
   sharePage,
   saveKey,
 }: {
-  // mainLogoVisible: boolean
-  // setMainLogoVisible: Dispatch<SetStateAction<boolean>>
   mainLogoRef: RefObject<HTMLDivElement | null>;
   sharePage?: boolean;
   saveKey: string | null;
 }) => {
-  // function handleVisibility(inView: boolean) {
-  //   setMainLogoVisible(inView)
-  // }
-
   return (
     <div className="mb-4 flex w-full flex-col border-y-8 border-y-slate-300 bg-slate-200 pt-8 xl:mt-0 xl:items-center xl:px-8">
       <div
         className="w-full"
         ref={mainLogoRef}
       >
-        {/* <InView as="div" onChange={handleVisibility} className="w-full"> */}
         <div className="flex flex-col justify-center">
           <div className="mx-auto w-52 xl:w-fit">
             <LinkBox
@@ -77,7 +62,6 @@ const UpperFold = ({
           )}
         </div>
       </div>
-      {/* </InView> */}
 
       {sharePage && (
         <ShareContents

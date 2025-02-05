@@ -10,7 +10,7 @@ import {
 } from "react";
 import { StartOverButton } from "./start-over-button";
 
-import UpperFold from "./UpperFold";
+import UpperFold from "./upper-fold";
 // import { InView } from 'react-intersection-observer'
 
 // const Main = ({

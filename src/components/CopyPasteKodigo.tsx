@@ -9,7 +9,7 @@ import { HiClipboardCopy } from "react-icons/hi";
 
 import orderedCandidateMap from "@public/candidates/orderedCandidateMap.json";
 
-import { decodeForSharing } from "../lib/forSharing";
+import { decodeForSharing } from "../lib/for-sharing";
 
 const CopyPasteKodigo = ({
   saveKey,
