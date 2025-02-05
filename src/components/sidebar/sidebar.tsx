@@ -6,7 +6,7 @@ import { StartOverButton } from "@/components/start-over-button";
 import logo from "@assets/logo.svg";
 import { SaveShareButton } from "@/components/save-share-button";
 import { LinkBox, LinkOverlay } from "@/components/link-overlay";
-import { Instructions } from "@/components/Instructions";
+import { Instructions } from "@/components/instructions";
 import { IS_DEVELOPMENT } from "@lib/constants";
 import { SidebarLinks } from "@/components/sidebar/sidebar-links";
 import { CandidateGroupValues } from "@/lib/CandidateTypes";

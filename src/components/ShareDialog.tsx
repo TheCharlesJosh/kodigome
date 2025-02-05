@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import SimpleModal from "./SimpleModal";
-import { toBase64, shimmer } from "../lib/loadingHelpers";
+import { toBase64, shimmer } from "../lib/loading-helpers";
 import { PrintButton } from "./print-button";
 import { SaveImageButton } from "./SaveImageButton";
 import { WebShareButton } from "./web-share-button";

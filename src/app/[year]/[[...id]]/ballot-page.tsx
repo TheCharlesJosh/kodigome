@@ -1,16 +1,16 @@
 "use client";
 import Sidebar from "@/components/sidebar/sidebar";
-import Main from "./Main";
-import Footer from "./Footer";
+import Main from "@/components/Main";
+import Footer from "@/components/footer";
 import { useForm, FormProvider, useFormState } from "react-hook-form";
 import { RefObject, useEffect, useRef, useState } from "react";
-import { CandidateGroupValues } from "../lib/CandidateTypes";
+import { CandidateGroupValues } from "@/lib/CandidateTypes";
 // import { useBeforeunload } from 'react-beforeunload'
 import { useBeforeUnload, useIntersection } from "react-use";
-import { encodeForSharing } from "../lib/forSharing";
+import { encodeForSharing } from "@/lib/for-sharing";
 import { ToastContainer } from "react-toastify";
 
-export const Home = ({
+export default function BallotPage({
   initialValues = {},
   sharePage = false,
   initialSaveKey = null,
@@ -20,13 +20,11 @@ export const Home = ({
   sharePage?: boolean;
   initialSaveKey: string | null;
   pageType?: string;
-}) => {
+}) {
   const methods = useForm({
     // defaultValues: initialValues,
   });
   const [saveKey, setSaveKey] = useState<string | null>(initialSaveKey);
-  // const [mainLogoVisible, setMainLogoVisible] = useState(true)
-  // const [ballotVisible, setBallotVisible] = useState(true)
 
   const onSubmit = async (data: CandidateGroupValues) => {
     const key = encodeForSharing(data);
@@ -53,14 +51,8 @@ export const Home = ({
     threshold: 1,
   });
   const mainLogoVisible = Boolean(
-    mainLogoIntersection && mainLogoIntersection.intersectionRatio < 1
+    mainLogoIntersection && mainLogoIntersection.intersectionRatio === 1
   );
-
-  // useBeforeunload((event: BeforeUnloadEvent) => {
-  //   if (isDirty) {
-  //     event.preventDefault()
-  //   }
-  // })
 
   useEffect(() => {
     Object.entries(initialValues).forEach(([key, value]) => {
@@ -95,9 +87,7 @@ export const Home = ({
               onSubmit={methods.handleSubmit(onSubmit)}
               saveKey={saveKey}
               mainLogoVisible={mainLogoVisible}
-              // setMainLogoVisible={setMainLogoVisible}
               ballotVisible={ballotVisible}
-              // setBallotVisible={setBallotVisible}
               pageType={pageType}
             />
           </div>
@@ -107,13 +97,9 @@ export const Home = ({
                 onSubmit={methods.handleSubmit(onSubmit)}
                 saveKey={saveKey}
                 reset={methods.reset}
-                // mainLogoVisible={mainLogoVisible}
-                // setMainLogoVisible={setMainLogoVisible}
                 sharePage={sharePage}
                 ballotRef={ballotRef}
                 mainLogoRef={mainLogoRef}
-                // ballotVisible={ballotVisible}
-                // setBallotVisible={setBallotVisible}
               />
             )}
             <Footer />
@@ -122,4 +108,4 @@ export const Home = ({
       </FormProvider>
     </div>
   );
-};
+}
