@@ -1,10 +1,10 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 export function Instructions({ isSidebar = false }: { isSidebar?: boolean }) {
   return (
-    <div className={clsx("my-8", !isSidebar && "px-8")}>
+    <div className={cn("my-8", !isSidebar && "px-8")}>
       <h2
-        className={clsx(
+        className={cn(
           "font-semibold",
           !isSidebar && "text-sm sm:text-base md:text-lg"
         )}
@@ -12,7 +12,7 @@ export function Instructions({ isSidebar = false }: { isSidebar?: boolean }) {
         Simply follow these steps:
       </h2>
       <ol
-        className={clsx(
+        className={cn(
           "list-inside list-decimal",
           !isSidebar && "text-sm sm:text-base md:text-lg"
         )}

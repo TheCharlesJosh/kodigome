@@ -9,7 +9,7 @@ export const metadata = generatePageMeta({
 
 const styledComponents = {
   h1: ({ children }: { children: ReactNode }) => (
-    <h2 className="max-w-prose text-center text-xl font-semibold uppercase tracking-tight text-indigo-600">
+    <h2 className="text-primary-600 max-w-prose text-center text-xl font-semibold uppercase tracking-tight">
       {children}
     </h2>
   ),
@@ -20,7 +20,7 @@ const styledComponents = {
 
 export default function Page() {
   return (
-    <div className="prose prose-indigo mx-4 mb-8 pt-4 text-gray-800 xl:prose-lg xl:mx-auto">
+    <div className="prose-primary prose mx-4 mb-8 pt-4 text-gray-800 xl:prose-lg xl:mx-auto">
       <Privacy components={styledComponents} />
     </div>
   );

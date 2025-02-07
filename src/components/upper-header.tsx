@@ -1,9 +1,9 @@
 import { LinkBox, LinkOverlay } from "@/components/link-overlay";
 import logo from "../assets/logo.svg";
 import Image from "next/image";
-import clsx from "clsx";
 import { ValueProp } from "./value-prop";
 import { RefObject } from "react";
+import { cn } from "@/lib/utils";
 
 export const UpperHeader = ({
   mainLogoRef,
@@ -44,7 +44,7 @@ export const UpperHeader = ({
             </>
           ) : (
             <h2
-              className={clsx(
+              className={cn(
                 "mx-auto mt-0 flex-col items-center gap-x-2 text-xl xl:mt-0 xl:flex-row",
                 !sharePage ? "hidden" : "flex"
               )}

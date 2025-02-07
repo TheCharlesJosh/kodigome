@@ -1,0 +1,14 @@
+[
+  { "position": "SENATOR", "multiple": true },
+  { "position": "MEMBER, HOUSE OF REPRESENTATIVES", "multiple": false },
+  { "position": "PROVINCIAL GOVERNOR", "multiple": false },
+  { "position": "PROVINCIAL VICE-GOVERNOR", "multiple": false },
+  { "position": "MEMBER, SANGGUNIANG PANLALAWIGAN", "multiple": true },
+  { "position": "MAYOR", "multiple": false },
+  { "position": "VICE-MAYOR", "multiple": false },
+  { "position": "MEMBER, SANGGUNIANG BAYAN", "multiple": true },
+  { "position": "MEMBER, SANGGUNIANG PANLUNGSOD", "multiple": true },
+  { "position": "BARMM PARTY REPRESENTATIVES", "multiple": false },
+  { "position": "BARMM MEMBERS OF THE PARLIAMENT", "multiple": false },
+  { "position": "PARTY LIST", "multiple": false }
+]

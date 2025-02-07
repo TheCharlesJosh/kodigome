@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { HiOutlineExternalLink } from "react-icons/hi";
-import clsx from "clsx";
 import Links from "./links.mdx";
 import { HTMLProps, ReactNode } from "react";
 import { BASE_URL } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 const styledComponents = {
   h4: ({ children }: { children: ReactNode }) => (
@@ -16,7 +16,7 @@ const styledComponents = {
     return (
       <Link
         href={href ?? ""}
-        className="cursor-pointer hover:text-indigo-600"
+        className="hover:text-primary-600 cursor-pointer"
         target={isExternal ? "_blank" : ""}
       >
         {children}
@@ -33,9 +33,9 @@ const styledComponents = {
 
 export const SidebarLinks = ({ footer = false }: { footer?: boolean }) => {
   return (
-    <div className={clsx(!footer && "my-8", footer && "flex-grow")}>
+    <div className={cn(!footer && "my-8", footer && "flex-grow")}>
       <ul
-        className={clsx(
+        className={cn(
           "flex flex-col justify-between gap-4 text-sm leading-6 text-gray-500 transition-colors",
           footer && "md:flex-row"
         )}

@@ -4,6 +4,7 @@ import { SidebarRedux } from "@/components/sidebar/sidebar";
 import { UpperHeader } from "@/components/upper-header";
 import { useRef, RefObject } from "react";
 import { useIntersection } from "react-use";
+import NotFoundContents from "./contents";
 
 export default function NotFound() {
   const mainLogoRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
@@ -30,7 +31,7 @@ export default function NotFound() {
             mainLogoRef={mainLogoRef}
             sharePage={false}
           />
-          <NotFound />
+          <NotFoundContents />
           <Footer />
         </div>
       </div>

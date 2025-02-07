@@ -1,17 +1,20 @@
 import {
-  CandidateGroupValues,
+  CandidateGroupValuesWithUser,
   CityMuni,
-  LocalCandidates,
-} from "./CandidateTypes";
+  LocalCandidatesType,
+  MegapackType,
+  NationalCandidateMultiple,
+} from "./types";
 import * as b64 from "@juanelas/base64";
-import userMap from "@public/candidates/userMap.json";
-import betterPositionMap from "@public/candidates/betterPositionMap.json";
-import localMapping from "@public/candidates/localMapping.json";
-import national from "@public/candidates/national.json";
 
 export const getBallotNumberRegex = /^\d+/;
 
-export function encodeForSharing(initialValues: CandidateGroupValues) {
+export async function encodeForSharing(
+  initialValues: CandidateGroupValuesWithUser,
+  megapack: MegapackType
+) {
+  const { provincesCitiesMunicipalities, betterPositionMap } = megapack;
+
   let numberBuilder: number[] = [];
 
   if (
@@ -27,9 +30,10 @@ export function encodeForSharing(initialValues: CandidateGroupValues) {
   if (
     initialValues.constructor === Object &&
     user?.hasOwnProperty("Province") &&
-    user.Province !== null
+    user.Province !== null &&
+    user.Province !== ""
   ) {
-    const provinceIndex = userMap.findIndex(
+    const provinceIndex = provincesCitiesMunicipalities.findIndex(
       (entry) => entry.province === user.Province
     );
 
@@ -37,9 +41,10 @@ export function encodeForSharing(initialValues: CandidateGroupValues) {
       numberBuilder = [255, 255, ...numberBuilder];
     } else if (
       user?.hasOwnProperty("City/Municipality") &&
-      user["City/Municipality"] !== null
+      user["City/Municipality"] !== null &&
+      user["City/Municipality"] !== ""
     ) {
-      const cityMuniIndex = userMap[
+      const cityMuniIndex = provincesCitiesMunicipalities[
         provinceIndex
       ].citiesMunicipalities.findIndex(
         (entry) => entry === user["City/Municipality"]
@@ -65,10 +70,6 @@ export function encodeForSharing(initialValues: CandidateGroupValues) {
           betterPositionMap.findIndex((x) => x.position === position) !== -1
             ? betterPositionMap.findIndex((x) => x.position === position)
             : 255;
-        // const positionArray =
-        //   positionMap.indexOf(position) !== -1
-        //     ? positionMap.indexOf(position)
-        //     : 255
         const votedForCount = Array.isArray(value) ? value.length : 1;
         const computedValue = Math.min(
           Number(16 * positionArray) + Number(votedForCount),
@@ -90,7 +91,6 @@ export function encodeForSharing(initialValues: CandidateGroupValues) {
               .filter((x) => x !== Infinity),
           ];
         } else if (typeof value === "string") {
-          //                 console.log(value)
           const candidateMatch = value.match(getBallotNumberRegex);
           if (candidateMatch == null) return acc;
           else return [...acc, computedValue, Number(candidateMatch[0])];
@@ -106,15 +106,19 @@ export function encodeForSharing(initialValues: CandidateGroupValues) {
   return b64.encode(new Uint8Array(numberBuilder), true, false);
 }
 
-export async function decodeForSharing(encodedString: string) {
-  // let convertedValues = {} as any
-  const convertedValues = {} as CandidateGroupValues;
-  // let convertedValues = {} as {
-  //   [key: string]:
-  //     | { Province?: string | null; 'City/Municipality'?: string | null }
-  //     | string
-  //     | string[]
-  // }
+export async function decodeForSharing(
+  encodedString: string,
+  megapack: MegapackType
+) {
+  const {
+    provincesCitiesMunicipalities,
+    betterPositionMap,
+    localMapping,
+    national,
+    yearCode,
+  } = megapack;
+
+  const convertedValues = {} as CandidateGroupValuesWithUser;
 
   if (typeof encodedString !== "string") {
     return convertedValues;
@@ -128,12 +132,17 @@ export async function decodeForSharing(encodedString: string) {
 
   const [provinceNumber, cityMuniNumber, ...restOfValues] = numberArray;
 
-  //     console.log(provinceNumber)
-  if (provinceNumber !== 255 && provinceNumber < userMap.length) {
+  if (
+    provinceNumber !== 255 &&
+    provinceNumber < provincesCitiesMunicipalities.length
+  ) {
     convertedValues.user = {};
-    convertedValues.user.Province = userMap[provinceNumber].province;
+    convertedValues.user.Province =
+      provincesCitiesMunicipalities[provinceNumber].province;
     convertedValues.user["City/Municipality"] =
-      userMap[provinceNumber].citiesMunicipalities[cityMuniNumber] || null;
+      provincesCitiesMunicipalities[provinceNumber].citiesMunicipalities[
+        cityMuniNumber
+      ] || null;
   }
 
   const cityMuniHit = localMapping.find(
@@ -142,12 +151,12 @@ export async function decodeForSharing(encodedString: string) {
       mapEntry.cityMunicipality === convertedValues.user?.["City/Municipality"]
   )?.identifier;
 
-  let localList = {} as LocalCandidates;
+  let localList = {} as LocalCandidatesType;
 
   try {
     if (cityMuniHit) {
       const localListRaw = await import(
-        `@public/candidates/local/${cityMuniHit}.json`
+        `@/assets/${yearCode}/json/${cityMuniHit}.json`
       );
       localList = localListRaw.default;
     }
@@ -158,7 +167,7 @@ export async function decodeForSharing(encodedString: string) {
   for (
     let i = 0,
       toggle = true,
-      currentPosition = "",
+      currentPosition: keyof CandidateGroupValuesWithUser | "" = "",
       multiple = false,
       votedForCount = 0;
     i < restOfValues.length;
@@ -170,29 +179,15 @@ export async function decodeForSharing(encodedString: string) {
     if (toggle) {
       // Compute for voteFor and positionMap, break when error
       const positionArray = Math.floor(pointer / 16.0);
-      // votedFor = votedForCount = pointer % 16
-      // currentPosition = positionMap[positionArray]
       multiple = betterPositionMap[positionArray]?.multiple ?? false;
       votedForCount = pointer % 16;
-      currentPosition = betterPositionMap[positionArray]
-        ?.position as keyof CandidateGroupValues;
+      currentPosition = betterPositionMap[positionArray]?.position;
       toggle = false;
     } else {
-      const isNational = [
-        "PRESIDENT",
-        "VICE PRESIDENT",
-        "SENATOR",
-        "PARTY LIST",
-      ].indexOf(currentPosition);
+      const isNational = Object.keys(NationalCandidateMultiple).indexOf(
+        currentPosition
+      );
       let candidateHit = String(pointer) as string | undefined;
-
-      // console.log(
-      //   votedFor,
-      //   isNational,
-      //   isKeyof(national, currentPosition),
-      //   national[currentPosition]?.candidates,
-      //   pointer
-      // )
 
       if (!multiple) {
         if (isNational !== -1) {
@@ -200,7 +195,6 @@ export async function decodeForSharing(encodedString: string) {
             candidateHit = national[currentPosition]?.candidates.find(
               matchCandidateNumberToCandidate(pointer)
             );
-            // console.log(candidateHit)
           }
         } else {
           if (isKeyof(localList, currentPosition)) {
@@ -213,16 +207,16 @@ export async function decodeForSharing(encodedString: string) {
         if (
           candidateHit &&
           currentPosition &&
-          candidateHit !== String(pointer)
+          candidateHit !== String(pointer) &&
+          convertedValues[currentPosition]
         ) {
-          // ;(convertedValues as { [key: string]: string | string[] })[
-          convertedValues[currentPosition] = candidateHit;
+          // Coerce to string because we know it does not need multiple entries
+          (convertedValues[currentPosition] as string) = candidateHit;
         }
       } else if (multiple && votedForCount) {
-        // console.log(isNational, currentPosition, pointer)
         if (isNational !== -1) {
           if (isKeyof(national, currentPosition)) {
-            candidateHit = national[currentPosition].candidates.find(
+            candidateHit = national[currentPosition]?.candidates.find(
               matchCandidateNumberToCandidate(pointer)
             );
           }
@@ -234,12 +228,11 @@ export async function decodeForSharing(encodedString: string) {
           }
         }
 
-        // console.log(currentPosition, candidateHit, pointer)
         if (
+          currentPosition &&
           convertedValues[currentPosition] &&
           Array.isArray(convertedValues[currentPosition]) &&
           candidateHit &&
-          currentPosition &&
           candidateHit !== String(pointer)
         ) {
           (convertedValues[currentPosition] as string[]) = [

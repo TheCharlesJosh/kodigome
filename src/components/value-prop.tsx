@@ -1,10 +1,10 @@
-import clsx from "clsx";
 import TextLoop from "./text-loop";
+import { cn } from "@/lib/utils";
 
 export const ValueProp = () => {
   return (
     <h2
-      className={clsx(
+      className={cn(
         "mx-auto mt-0 flex flex-col justify-center gap-x-2 text-center text-sm sm:text-base md:text-xl xl:mt-0 xl:flex-row"
       )}
     >

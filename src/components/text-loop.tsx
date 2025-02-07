@@ -9,13 +9,7 @@ import {
   useState,
 } from "react";
 import { useMeasure } from "react-use";
-import {
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useTime,
-  useTransform,
-} from "motion/react";
+import { motion, useTime, useTransform } from "motion/react";
 
 export default function TextLoop({
   duration = 1,
@@ -28,52 +22,8 @@ export default function TextLoop({
     [name: string]: { width: number; height: number };
   }>({});
   const maxChild = Object.keys(childList).length;
-  // const [_selectedIndex, setSelectedIndex] = useState<number>(0);
-  // const containerWidth = useMotionValue(0);
-  // const containerHeight = useMotionValue(0);
-
-  // useEffect(() => {
-  //   const maxChild = Object.keys(childList).length;
-  //   if (childList[0]) {
-  //     containerWidth.set(childList[0].width);
-  //     containerHeight.set(childList[0].height);
-  //   }
-
-  //   const interval = setInterval(() => {
-  //     setSelectedIndex((index) => {
-  //       const newIndex = (index + 1) % maxChild;
-  //       containerWidth.set(childList[newIndex].width);
-  //       containerHeight.set(childList[newIndex].height);
-  //       return newIndex;
-  //     });
-  //   }, duration * 1000);
-
-  //   return () => clearInterval(interval);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [childList, duration]);
 
   const time = useTime();
-  // const containerWidth = useTransform(
-  //   time,
-  //   Object.values(childList)
-  //     .map((child) => [child.width, child.width])
-  //     .flat(),
-  //   Object.keys(childList)
-  //     .map((order) => [Number(order), Number(order) * duration - 0.2])
-  //     .flat(),
-  //   { clamp: false }
-  // );
-  // const containerHeight = useTransform(
-  //   time,
-  //   Object.values(childList)
-  //     .map((child) => [child.height, child.height])
-  //     .flat(),
-  //   Object.keys(childList)
-  //     .map((order) => [Number(order), Number(order) * duration - 0.2])
-  //     .flat(),
-  //   { clamp: false }
-  // );
-
   const cw = useTransform(() => {
     const index = Math.floor(time.get() / (duration * 1000)) % maxChild;
     return childList[index]?.width ?? 0;

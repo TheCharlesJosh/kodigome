@@ -2,21 +2,24 @@ import logo from "../assets/logo.svg";
 import Image from "next/image";
 import { RefObject } from "react";
 import { HiOutlineArrowDown, HiOutlineInformationCircle } from "react-icons/hi";
-import clsx from "clsx";
 import { ShareContents } from "./ShareDialog";
 import { LinkBox, LinkOverlay } from "./link-overlay";
 import { Instructions } from "./instructions";
 import Link from "next/link";
 import { ValueProp } from "./value-prop";
+import { cn } from "@/lib/utils";
+import { MegapackType } from "@/lib/types";
 
 const UpperFold = ({
   mainLogoRef,
   sharePage,
   saveKey,
+  megapack,
 }: {
   mainLogoRef: RefObject<HTMLDivElement | null>;
   sharePage?: boolean;
   saveKey: string | null;
+  megapack: MegapackType;
 }) => {
   return (
     <div className="mb-4 flex w-full flex-col border-y-8 border-y-slate-300 bg-slate-200 pt-8 xl:mt-0 xl:items-center xl:px-8">
@@ -52,7 +55,7 @@ const UpperFold = ({
             </>
           ) : (
             <h2
-              className={clsx(
+              className={cn(
                 "mx-auto mt-0 flex-col items-center gap-x-2 text-xl xl:mt-0 xl:flex-row",
                 !sharePage ? "hidden" : "flex"
               )}
@@ -67,6 +70,7 @@ const UpperFold = ({
         <ShareContents
           saveKey={saveKey}
           isUpperFold={true}
+          megapack={megapack}
         />
       )}
       {!sharePage ? (
@@ -83,7 +87,7 @@ const UpperFold = ({
         <a
           href="#national"
           type="button"
-          className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex items-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
         >
           <HiOutlineArrowDown
             className="-ml-1 mr-3 h-5 w-5 animate-bounce"
@@ -96,19 +100,19 @@ const UpperFold = ({
         <div className="flex">
           <div className="flex-shrink-0">
             <HiOutlineInformationCircle
-              className="h-5 w-5 text-indigo-400"
+              className="text-primary-400 h-5 w-5"
               aria-hidden="true"
             />
           </div>
           <div className="ml-3 flex-1 md:flex md:justify-between">
             <p className="text-xs text-gray-700 md:text-sm">
-              <span className="font-bold text-indigo-600">
+              <span className="text-primary-600 font-bold">
                 Heads up! You keep full ownership of your data and your kodigo.{" "}
               </span>
               kodigo.me does not store any personal information, nor any
               information you key in. kodigo.me is not affiliated with COMELEC,
-              Vote Pilipinas, any political party, or any media institution.{" "}
-              <span className="font-bold text-indigo-600">
+              any political party, or any media institution.{" "}
+              <span className="text-primary-600 font-bold">
                 This is not a survey. This is not an official ballot.
               </span>
             </p>

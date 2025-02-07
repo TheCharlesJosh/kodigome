@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import SimpleModal from "./SimpleModal";
+import SimpleModal from "./simple-modal";
 import { toBase64, shimmer } from "../lib/loading-helpers";
 import { PrintButton } from "./print-button";
 import { SaveImageButton } from "./SaveImageButton";
@@ -25,17 +25,20 @@ import {
   ViberShareButton,
   ViberIcon,
 } from "react-share";
-import { BASE_URL, cloudinaryLoader } from "../lib/constants";
+import { BASE_URL, cloudinaryLoader } from "@lib/constants";
 import CopyPasteKodigo from "./CopyPasteKodigo";
+import { MegapackType } from "@/lib/types";
 
 export const ShareDialog = ({
   openModal,
   setOpenModal,
   saveKey,
+  megapack,
 }: {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   saveKey: string | null;
+  megapack: MegapackType;
 }) => {
   function handleResponse(_userInput: boolean) {
     // if (userInput === true) reset()
@@ -52,6 +55,7 @@ export const ShareDialog = ({
       <ShareContents
         saveKey={saveKey}
         isUpperFold={false}
+        megapack={megapack}
       />
     </SimpleModal>
   );
@@ -60,16 +64,19 @@ export const ShareDialog = ({
 export const ShareContents = ({
   saveKey,
   isUpperFold = false,
+  megapack,
 }: {
   saveKey: string | null;
   isUpperFold?: boolean;
+  megapack: MegapackType;
 }) => {
+  const { year, shortName, hashtags } = megapack;
   const [blob, setBlob] = useState<Blob>();
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isImageError, setImageError] = useState(false);
   const [imageSrc, setImageSrc] = useState(saveKey ?? "_");
 
-  const shareURL = BASE_URL + "/share/" + saveKey;
+  const shareURL = BASE_URL + `/${year}/` + saveKey;
   // const shareURL = BASE_URL + '/share/' + saveKey
   // const imageURL = BASE_URL + '/api/png/' + saveKey
   const imageURL = cloudinaryLoader({ src: saveKey ?? "_" });
@@ -87,8 +94,8 @@ export const ShareContents = ({
   }, [saveKey]);
 
   const shareData = {
-    title: "kodigo.me 🗳 | My Preferred Candidates",
-    text: "I just created my own kodigo 🗳 for PH Elections 2022! #VoteSafePilipinas #BumotoKa #NLE2022 #Halalan2022",
+    title: `kodigo.me 🗳 | My Preferred Candidates for ${shortName}`,
+    text: `I just created my own kodigo 🗳 for PH Elections ${shortName}! ${hashtags}`,
     url: shareURL,
   };
 
@@ -259,7 +266,7 @@ const ShareURL = ({ url }: { url: string }) => {
             type="text"
             name="shareURL"
             id="shareURL"
-            className="block w-full rounded-none rounded-l-md border-gray-300 pl-8 text-xs focus:border-indigo-500 focus:ring-indigo-500 sm:pl-10 sm:text-sm"
+            className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-none rounded-l-md border-gray-300 pl-8 text-xs sm:pl-10 sm:text-sm"
             placeholder="Share URL"
             defaultValue={url}
             ref={linkRef}
@@ -268,7 +275,7 @@ const ShareURL = ({ url }: { url: string }) => {
         </div>
         <button
           type="button"
-          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+          className="focus:border-primary-500 focus:ring-primary-500 relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-1 sm:text-sm"
           onClick={() => {
             requestAnimationFrame(() => {
               if (linkRef && linkRef.current) {

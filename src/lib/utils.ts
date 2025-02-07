@@ -6,6 +6,7 @@ const twMergeConfig = {
   extend: {
     theme: {
       spacing: ["8xl"],
+      color: ["odd-2022", "even-2022", "odd-2025", "even-2025", "primary"],
     },
     classGroups: {
       "font-family": [
@@ -21,7 +22,7 @@ defaultConfig.twMergeConfig = twMergeConfig;
 
 const customTwMerge = extendTailwindMerge(twMergeConfig);
 
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]): string {
   return customTwMerge(clsx(inputs));
 }
 
@@ -32,4 +33,12 @@ export const IS_DEVELOPMENT = process.env.NODE_ENV === "development";
 
 export async function fetcher(...args: Parameters<typeof fetch>) {
   return (await fetch(...args)).json();
+}
+
+export function isKeyof<T extends object>(
+  obj: T,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  possibleKey: keyof any
+): possibleKey is keyof T {
+  return possibleKey in obj;
 }

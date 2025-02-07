@@ -1,16 +1,16 @@
-import clsx from "clsx";
 import Link from "next/link";
 import { IS_DEVELOPMENT } from "../lib/constants";
 import { SidebarLinks } from "./sidebar/sidebar-links";
-import { CandidateGroupValues } from "@/lib/CandidateTypes";
+import { CandidateGroupValuesWithUser } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-const Footer = ({ peek }: { peek?: CandidateGroupValues }) => {
+const Footer = ({ peek }: { peek?: CandidateGroupValuesWithUser }) => {
   return (
     <div className="w-full border-t p-8">
       <div className="mb-8 md:text-center">
         <Link
           href={"/"}
-          className="cursor-pointer font-bold text-gray-800 hover:text-indigo-600"
+          className="hover:text-primary-600 cursor-pointer font-bold text-gray-800"
         >
           kodigo.me 🗳 • 2025 • 🇵🇭 Para Sa Bayan
         </Link>
@@ -20,7 +20,7 @@ const Footer = ({ peek }: { peek?: CandidateGroupValues }) => {
         <details className="my-2">
           <summary>Debug</summary>
           <pre
-            className={clsx(
+            className={cn(
               "w-full overflow-x-scroll bg-gray-200 p-2 text-sm text-gray-700"
             )}
           >

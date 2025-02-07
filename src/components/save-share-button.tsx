@@ -1,15 +1,18 @@
 import { HiSave } from "react-icons/hi";
 import { BaseSyntheticEvent, MouseEvent, useState } from "react";
 import { ShareDialog } from "./ShareDialog";
+import { MegapackType } from "@/lib/types";
 
 export const SaveShareButton = ({
   onSubmit,
   saveKey,
+  megapack,
 }: {
   onSubmit: (
     e?: BaseSyntheticEvent<object, unknown, unknown> | undefined
   ) => Promise<void>;
   saveKey: string | null;
+  megapack: MegapackType;
 }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -25,7 +28,7 @@ export const SaveShareButton = ({
     <>
       <button
         type="button"
-        className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex items-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
         onClick={handleOpenModal}
       >
         <HiSave
@@ -34,7 +37,7 @@ export const SaveShareButton = ({
         />
         Save/Share
       </button>
-      <ShareDialog {...{ openModal, setOpenModal, saveKey }} />
+      <ShareDialog {...{ openModal, setOpenModal, saveKey, megapack }} />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { HiRefresh } from "react-icons/hi";
 import { MouseEvent, useState } from "react";
 import { FieldValues, UseFormReset } from "react-hook-form";
-import SimpleModal from "./SimpleModal";
+import SimpleModal from "./simple-modal";
 
 export const StartOverButton = ({
   reset,
@@ -22,7 +22,7 @@ export const StartOverButton = ({
       <button
         type="button"
         onClick={handleOpenModal}
-        className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="focus:ring-primary-500 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2"
       >
         <HiRefresh
           className="-ml-1 mr-2 h-5 w-5"

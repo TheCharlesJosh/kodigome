@@ -2,47 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-.no-scroll-shadows {
-  background: none auto auto no-repeat auto auto scroll;
-}
+@layer base {
+  /* Based on odd-2025: https://tints.dev/primary/9CC2C5 */
+  .primary-2025 {
+    --color-primary-50: #eff5f6;
+    --color-primary-100: #dfebec;
+    --color-primary-200: #bbd6d7;
+    --color-primary-300: #9cc2c5; /* Base color */
+    --color-primary-400: #7baeb2;
+    --color-primary-500: #5c999e;
+    --color-primary-600: #4b7d81;
+    --color-primary-700: #395e60;
+    --color-primary-800: #263f40;
+    --color-primary-900: #131f20;
+    --color-primary-950: #091010;
+  }
 
-.scroll-shadows {
-  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)) center top,
-    linear-gradient(rgba(255, 255, 255, 0), white 70%) center bottom,
-    -gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) center
-      top,
-    -gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) center
-      bottom;
+  /* Based on even-2025: https://tints.dev/primary/dae8cf */
+  .secondary-2025 {
+    --color-primary-50: #fafcf8;
+    --color-primary-100: #f2f7ee;
+    --color-primary-200: #e7f0e0;
+    --color-primary-300: #dae8cf; /* Base color */
+    --color-primary-400: #bad4a5;
+    --color-primary-500: #9ac07c;
+    --color-primary-600: #77a951;
+    --color-primary-700: #5a803d;
+    --color-primary-800: #3d5629;
+    --color-primary-900: #1d2914;
+    --color-primary-950: #0f150a;
+  }
 
-  background-repeat: no-repeat;
-  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-  background-attachment: local, local, scroll, scroll;
-}
+  /* Based on odd-2022: https://tints.dev/primary/0070C0 */
+  .primary-2022 {
+    --color-primary-50: #e0f2ff;
+    --color-primary-100: #c2e6ff;
+    --color-primary-200: #80caff;
+    --color-primary-300: #42b0ff;
+    --color-primary-400: #0095ff;
+    --color-primary-500: #0070c0; /* Base color */
+    --color-primary-600: #005999;
+    --color-primary-700: #004475;
+    --color-primary-800: #002d4d;
+    --color-primary-900: #001829;
+    --color-primary-950: #000c14;
+  }
 
-.shadow {
-  position: absolute;
-  left: 0;
-  z-index: 100;
-  width: 100%;
-  height: 10px;
-  background: red;
-}
+  /* Based on even-2022: https://tints.dev/primary/00b050 */
+  .secondary-2022 {
+    --color-primary-50: #dbffeb;
+    --color-primary-100: #bdffdb;
+    --color-primary-200: #7affb6;
+    --color-primary-300: #38ff92;
+    --color-primary-400: #00f56e;
+    --color-primary-500: #00b050; /* Base color */
+    --color-primary-600: #008f40;
+    --color-primary-700: #006b30;
+    --color-primary-800: #004720;
+    --color-primary-900: #002410;
+    --color-primary-950: #000f07;
+  }
 
-.bg-graph {
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23efedf3' fill-opacity='0.4'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
+  /* Based on Tailwind indigo */
+  :root {
+    --color-primary-50: theme(colors.indigo.50);
+    --color-primary-100: theme(colors.indigo.100);
+    --color-primary-200: theme(colors.indigo.200);
+    --color-primary-300: theme(colors.indigo.300);
+    --color-primary-400: theme(colors.indigo.400);
+    --color-primary-500: theme(colors.indigo.500);
+    --color-primary-600: theme(colors.indigo.600);
+    --color-primary-700: theme(colors.indigo.700);
+    --color-primary-800: theme(colors.indigo.800);
+    --color-primary-900: theme(colors.indigo.900);
+    --color-primary-950: theme(colors.indigo.950);
+  }
 
-.shadow--top {
-  top: 0;
-  background: -webkit-linear-gradient(270deg, rgba(0, 0, 0, 0.35), transparent);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent);
-  opacity: 0;
-}
+  .no-scroll-shadows {
+    background: none auto auto no-repeat auto auto scroll;
+  }
 
-.shadow--bottom {
-  bottom: 0;
-  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent);
-  opacity: 0;
+  .scroll-shadows {
+    background:
+      linear-gradient(white 30%, rgba(255, 255, 255, 0)) center top,
+      linear-gradient(rgba(255, 255, 255, 0), white 70%) center bottom,
+      -gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0))
+        center top,
+      -gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0))
+        center bottom;
+
+    background-repeat: no-repeat;
+    background-size:
+      100% 40px,
+      100% 40px,
+      100% 14px,
+      100% 14px;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .shadow {
+    position: absolute;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 10px;
+    background: red;
+  }
+
+  .bg-graph {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23efedf3' fill-opacity='0.4'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .shadow--top {
+    top: 0;
+    background: -webkit-linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0.35),
+      transparent
+    );
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent);
+    opacity: 0;
+  }
+
+  .shadow--bottom {
+    bottom: 0;
+    background: -webkit-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.35),
+      transparent
+    );
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent);
+    opacity: 0;
+  }
 }

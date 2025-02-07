@@ -2,26 +2,28 @@ import type { Metadata } from "next";
 import { inter } from "@/lib/fonts";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "@/lib/constants";
 
-const APP_NAME = "kodigo.me 🗳 | PH Election Ballot Kodigo Generator";
-const APP_DEFAULT_TITLE =
+const APP_NAME = "kodigo.me";
+const SITE_TITLE = "kodigo.me 🗳 | PH Election Ballot Kodigo Generator";
+const SITE_TITLE_TEMPLATE = "%s - kodigo.me 🗳";
+const SITE_DESCRIPTION =
   "Create your own kodigo ahead of time so that you can save time voting on election day. 🇵🇭";
-const APP_TITLE_TEMPLATE = "%s - kodigo.me 🗳";
-const APP_DESCRIPTION = "PH Election Ballot Kodigo Generator";
-const APP_IMAGE = "/main-meta.png";
+const SITE_IMAGE = "/main-meta.png";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: {
-    default: APP_DEFAULT_TITLE,
-    template: APP_TITLE_TEMPLATE,
+    default: SITE_TITLE,
+    template: SITE_TITLE_TEMPLATE,
   },
-  description: APP_DESCRIPTION,
+  metadataBase: new URL(BASE_URL),
+  description: SITE_DESCRIPTION,
   manifest: "/manifest.json",
   appleWebApp: {
-    title: APP_DEFAULT_TITLE,
+    title: SITE_TITLE,
     statusBarStyle: "black-translucent",
-    startupImage: [APP_IMAGE],
+    startupImage: [SITE_IMAGE],
   },
   other: {
     "mobile-web-app-capable": "yes",
@@ -31,15 +33,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: APP_NAME,
+    siteName: SITE_TITLE,
     title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
+      default: SITE_TITLE,
+      template: SITE_TITLE_TEMPLATE,
     },
-    description: APP_DESCRIPTION,
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: APP_IMAGE,
+        url: SITE_IMAGE,
         width: 1917,
         height: 960,
       },
@@ -48,13 +50,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
+      default: SITE_TITLE,
+      template: SITE_TITLE_TEMPLATE,
     },
-    description: APP_DESCRIPTION,
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: APP_IMAGE,
+        url: SITE_IMAGE,
         width: 1917,
         height: 960,
       },

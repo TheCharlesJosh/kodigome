@@ -1,33 +1,40 @@
 "use client";
 import Sidebar from "@/components/sidebar/sidebar";
-import Main from "@/components/Main";
+import Main from "@/components/main";
 import Footer from "@/components/footer";
 import { useForm, FormProvider, useFormState } from "react-hook-form";
 import { RefObject, useEffect, useRef, useState } from "react";
-import { CandidateGroupValues } from "@/lib/CandidateTypes";
-// import { useBeforeunload } from 'react-beforeunload'
+import { CandidateGroupValuesWithUser, MegapackType } from "@/lib/types";
 import { useBeforeUnload, useIntersection } from "react-use";
 import { encodeForSharing } from "@/lib/for-sharing";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { cn } from "@/lib/utils";
 
 export default function BallotPage({
   initialValues = {},
   sharePage = false,
   initialSaveKey = null,
   pageType = "main",
+  megapack,
+  error,
+  className = "",
 }: {
-  initialValues?: CandidateGroupValues;
+  initialValues?: CandidateGroupValuesWithUser;
   sharePage?: boolean;
   initialSaveKey: string | null;
   pageType?: string;
+  megapack: MegapackType;
+  error?: string;
+  className?: string;
 }) {
-  const methods = useForm({
+  const methods = useForm<CandidateGroupValuesWithUser>({
     // defaultValues: initialValues,
+    defaultValues: { user: { Province: "", "City/Municipality": "" } },
   });
   const [saveKey, setSaveKey] = useState<string | null>(initialSaveKey);
 
-  const onSubmit = async (data: CandidateGroupValues) => {
-    const key = encodeForSharing(data);
+  const onSubmit = async (data: CandidateGroupValuesWithUser) => {
+    const key = await encodeForSharing(data, megapack);
     setSaveKey(key);
   };
 
@@ -56,12 +63,18 @@ export default function BallotPage({
 
   useEffect(() => {
     Object.entries(initialValues).forEach(([key, value]) => {
-      methods.setValue(key, value);
+      methods.setValue(key as keyof CandidateGroupValuesWithUser, value || "");
     });
   }, [initialValues, methods]);
 
+  useEffect(() => {
+    if (error && error === "keyNotFound") {
+      toast.error("Sorry, you may have found an incorrect link.");
+    }
+  });
+
   return (
-    <div className="bg-white">
+    <div className={cn("bg-white", className)}>
       <ToastContainer
         position="bottom-left"
         autoClose={5000}
@@ -89,6 +102,7 @@ export default function BallotPage({
               mainLogoVisible={mainLogoVisible}
               ballotVisible={ballotVisible}
               pageType={pageType}
+              megapack={megapack}
             />
           </div>
           <div className="border-dashed border-gray-400 xl:basis-9/12 xl:border-l-8 xl:border-r-8">
@@ -100,6 +114,7 @@ export default function BallotPage({
                 sharePage={sharePage}
                 ballotRef={ballotRef}
                 mainLogoRef={mainLogoRef}
+                megapack={megapack}
               />
             )}
             <Footer />
