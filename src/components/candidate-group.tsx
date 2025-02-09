@@ -19,7 +19,10 @@ import startCase from "lodash.startcase";
 
 import { Scrollbar } from "react-scrollbars-custom";
 import { cn } from "@/lib/utils";
-import { candidateGroup } from "@/lib/style-variants";
+import { candidateGroup, overrideToEven } from "@/lib/style-variants";
+// import { useReward } from "react-rewards";
+// import { useThrottleFn } from "react-use";
+import Confetti from "react-dom-confetti";
 
 export const CandidateGroup = ({
   position,
@@ -96,6 +99,46 @@ export const CandidateGroup = ({
 
   const [isWindowMedium, setWindowMedium] = useState(false);
 
+  // const { reward } = useReward(`confetti-${position}`, "confetti", {
+  //   zIndex: 40,
+  //   position: "absolute",
+  //   decay: 0.9,
+  //   spread: 180,
+  //   startVelocity: 10,
+  //   angle: 45,
+  //   lifetime: 100,
+  //   elementCount: 50,
+  // });
+
+  // useThrottleFn(
+  //   (remainingVotes) => {
+  //     if (remainingVotes === 0 && voteFor > 1) {
+  //       reward();
+  //     }
+  //   },
+  //   2000,
+  //   [remainingVotes]
+  // );
+  /*   useEffect(() => {
+    if (remainingVotes === 0) {
+      // if (remainingVotes === 0 && voteFor > 1) {
+      reward();
+    }
+  }, [remainingVotes, reward, voteFor]); */
+
+  const confettiConfig = {
+    spread: 135,
+    startVelocity: 18,
+    elementCount: 60,
+    dragFriction: 0.2,
+    duration: 600,
+    stagger: 5,
+    width: "10px",
+    height: "10px",
+    perspective: "550px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
+  };
+
   const oddEven = Number(groupIndex) % 2 === 0 ? "odd" : "even";
   const { base, primary, chip, chipCircle, helperButton, search } =
     candidateGroup({
@@ -108,7 +151,7 @@ export const CandidateGroup = ({
       className={cn(
         "relative",
         // Custom rules for ballot quirks
-        ["SENATOR"].includes(position) && year === "2025"
+        overrideToEven(position, year)
           ? base({
               oddEven: "even",
             })
@@ -123,13 +166,47 @@ export const CandidateGroup = ({
           )}
         >
           <div className="flex-grow">
-            <h3 className={cn("font-bold leading-6 md:text-lg")}>{position}</h3>
+            <div className="inline-flex gap-2">
+              <h3 className={cn("font-bold leading-6 md:text-lg")}>
+                {position}
+              </h3>
+              {candidatesVotedCount !== 0 && (
+                <span
+                  className={cn(
+                    "my-0.5 hidden items-center rounded-md py-0.5 text-xs font-medium md:inline-flex md:rounded-full",
+                    remainingVotes > 0 ? "px-2.5" : "px-[7px]",
+                    chip()
+                  )}
+                >
+                  <Confetti
+                    active={remainingVotes === 0 && voteFor > 1}
+                    config={{ ...confettiConfig, angle: 45 }}
+                    className="z-50"
+                  />
+
+                  {remainingVotes > 0 && (
+                    <svg
+                      className={cn("-ml-0.5 mr-1.5 h-2 w-2", chipCircle())}
+                      fill="currentColor"
+                      viewBox="0 0 8 8"
+                    >
+                      <circle
+                        cx={4}
+                        cy={4}
+                        r={3}
+                      />
+                    </svg>
+                  )}
+                  {remainingVotes > 0 ? String(remainingVotes) + " left" : "✓"}
+                </span>
+              )}
+            </div>
             <p className={cn("max-w-4xl text-xs md:text-sm")}>
               Vote no more than {voteFor || 0}, or leave blank.{" "}
             </p>
           </div>
           <div className="relative z-0 flex flex-col-reverse items-center justify-center lg:flex-row lg:gap-2">
-            <div className="my-auto h-full">
+            <div className="my-auto block h-full md:hidden">
               {" "}
               {candidatesVotedCount !== 0 && (
                 <span
@@ -138,6 +215,12 @@ export const CandidateGroup = ({
                     chip()
                   )}
                 >
+                  <Confetti
+                    active={remainingVotes === 0 && voteFor > 1}
+                    config={{ ...confettiConfig, angle: 135 }}
+                    className="z-50"
+                  />
+
                   {remainingVotes > 0 && (
                     <svg
                       className={cn("-ml-0.5 mr-1.5 h-2 w-2", chipCircle())}
@@ -189,7 +272,7 @@ export const CandidateGroup = ({
         </div>
         <div
           className={cn(
-            "relative mt-1 pl-[0.2rem] pr-1",
+            "poi relative mt-1 pl-[0.2rem] pr-1",
             !showSearch && "hidden"
           )}
         >

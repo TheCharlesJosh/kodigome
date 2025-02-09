@@ -4,7 +4,8 @@ import { HiOutlinePrinter, HiOutlineRefresh } from "react-icons/hi";
 import { WhiteButtonBase } from "./white-button-base";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+// import { saveAs } from "file-saver"
 
 export const PrintButton = ({
   pdfURL,
@@ -29,7 +30,7 @@ export const PrintButton = ({
           setTimeout(() => {
             setLoading((isLoading) => {
               if (isLoading === true) {
-                toast.info("Downloading PDF...", { toastId: "print-fallback" });
+                // toast.info("Downloading PDF...", { toastId: "print-fallback" });
                 router.push("/api/pdf/" + id);
                 return false;
               } else return isLoading;
@@ -39,12 +40,10 @@ export const PrintButton = ({
       });
   };
   return (
-    <>
-      <WhiteButtonBase
-        message="Print"
-        onClick={handleClick}
-        Icon={isLoading ? HiOutlineRefresh : HiOutlinePrinter}
-      />
-    </>
+    <WhiteButtonBase
+      message="Print"
+      onClick={handleClick}
+      Icon={isLoading ? HiOutlineRefresh : HiOutlinePrinter}
+    />
   );
 };

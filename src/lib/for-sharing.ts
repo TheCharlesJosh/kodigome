@@ -207,8 +207,7 @@ export async function decodeForSharing(
         if (
           candidateHit &&
           currentPosition &&
-          candidateHit !== String(pointer) &&
-          convertedValues[currentPosition]
+          candidateHit !== String(pointer)
         ) {
           // Coerce to string because we know it does not need multiple entries
           (convertedValues[currentPosition] as string) = candidateHit;

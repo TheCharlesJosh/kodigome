@@ -34,9 +34,11 @@ These files need to be generated, or updated:
 | File                                                     | Type                  | Notes                                                                                                            |
 | -------------------------------------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `tailwind.config.ts`                                     | Styling               | Tailwind configuration for Odd and Even. Use [https://tints.dev](tints.dev) to generate colors and variables     |
-| `src/app/globals.css`                                    | Styling               | CSS Variables for Primary and Secondary. Use [https://tints.dev](tints.dev) to generate colors and variables     |
+| `next.config.ts`                                         | Redirects             | Home redirect to latest elections; backwards compatibility with 2022 setup                                       |
 | `src/lib/utils.ts`                                       | Styling               | Tailwind merge config for custom Tailwind configs                                                                |
 | `src/components/candidate-group.tsx`                     | Styling               | Change the `base()` rules if there are weird ballot color quirks.                                                |
+| `src/components/sidebar/links.mdx`                       | Links                 | Update the sidebar and footer links when necessary.                                                              |
+| `src/app/globals.css`                                    | Styling               | CSS Variables for Primary and Secondary. Use [https://tints.dev](tints.dev) to generate colors and variables     |
 | `src/app/[year]/[[...id]].tsx`                           | Styling               | Change the `className` rules for different years.                                                                |
 | `src/lib/types.ts`                                       | Types and definitions | Define the folders, short name, hashtags, aggregated positions across all elections, if can vote multiple or not |
 | `src/assets/{folder}/betterPositionMap.json`             | Ballot                | List of positions and if the user needs to vote for one or many (Created manually)                               |

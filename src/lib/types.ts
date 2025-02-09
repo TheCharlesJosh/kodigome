@@ -10,6 +10,7 @@ export const yearPack = {
     longName: "MAY 12, 2025 NATIONAL, LOCAL AND BARMM PARLIAMENTARY ELECTIONS",
     electionDate: "2025-05-12",
     hashtags: "#NLE2025 #Halalan2025",
+    colors: ["#4b7d81", "#77a951"], // primary-600, secondary-600
   },
   "2022": {
     yearCode: "2022-01-28",
@@ -17,6 +18,7 @@ export const yearPack = {
     longName: "MAY 9, 2022 NATIONAL AND LOCAL ELECTIONS",
     electionDate: "2022-05-9",
     hashtags: "#VoteSafePilipinas #BumotoKa #NLE2022 #Halalan2022",
+    colors: ["#005999", "#008f40"], // primary-600, secondary-600
   },
 };
 
@@ -134,6 +136,7 @@ export type MegapackType = {
   localMapping: CityMuni[];
   provincesCitiesMunicipalities: ProvincesCitiesMunicipalitiesType[];
   betterPositionMap: BetterPositionMapType[];
+  colors: string[];
 };
 
 // Unfortunately, I still need to make consts because I can't extract keys as string arrays.

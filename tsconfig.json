@@ -34,7 +34,7 @@
     ".next/types/**/*.ts",
     "env.d.ts",
     "tailwind.config.js",
-    "src/app/share/[...id]"
+    "src/app/hide/share/[...id]"
   ],
   "exclude": ["node_modules"]
 }

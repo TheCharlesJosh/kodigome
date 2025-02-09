@@ -1,5 +1,8 @@
 import { tv } from "tailwind-variants";
 
+export const overrideToEven = (position: string, year: string) =>
+  ["SENATOR"].includes(position) && year === "2025";
+
 export const candidateGroup = tv({
   slots: {
     base: "",

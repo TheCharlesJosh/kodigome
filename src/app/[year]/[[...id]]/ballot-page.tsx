@@ -71,10 +71,10 @@ export default function BallotPage({
     if (error && error === "keyNotFound") {
       toast.error("Sorry, you may have found an incorrect link.");
     }
-  });
+  }, [error]);
 
   return (
-    <div className={cn("bg-white", className)}>
+    <div className={cn("bg-white p-4", className)}>
       <ToastContainer
         position="bottom-left"
         autoClose={5000}

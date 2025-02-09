@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-
 export default async function Home() {
-  return redirect("/2025");
+  return <div>kodigo.me 🗳️</div>;
 }

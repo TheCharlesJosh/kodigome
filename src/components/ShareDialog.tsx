@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import SimpleModal from "./simple-modal";
 import { toBase64, shimmer } from "../lib/loading-helpers";
 import { PrintButton } from "./print-button";
-import { SaveImageButton } from "./SaveImageButton";
+import { SaveImageButton } from "./save-image-button";
 import { WebShareButton } from "./web-share-button";
 import {
   HiOutlineClipboardCopy,
@@ -25,8 +25,8 @@ import {
   ViberShareButton,
   ViberIcon,
 } from "react-share";
-import { BASE_URL, cloudinaryLoader } from "@lib/constants";
-import CopyPasteKodigo from "./CopyPasteKodigo";
+import { BASE_URL } from "@lib/constants";
+import CopyPasteKodigo from "./copy-paste-kodigo";
 import { MegapackType } from "@/lib/types";
 
 export const ShareDialog = ({
@@ -74,24 +74,25 @@ export const ShareContents = ({
   const [blob, setBlob] = useState<Blob>();
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isImageError, setImageError] = useState(false);
-  const [imageSrc, setImageSrc] = useState(saveKey ?? "_");
+  const [imageSrc, setImageSrc] = useState(`/${year}/png/${saveKey ?? "_"}`);
 
   const shareURL = BASE_URL + `/${year}/` + saveKey;
   // const shareURL = BASE_URL + '/share/' + saveKey
-  // const imageURL = BASE_URL + '/api/png/' + saveKey
-  const imageURL = cloudinaryLoader({ src: saveKey ?? "_" });
+  // const imageURL = BASE_URL + `/${year}/png/` + saveKey;
+  // const imageURL = `/${year}/png/` + (saveKey ?? "_");
+  // const imageURL = cloudinaryLoader({ src: saveKey ?? "_" });
   // const pdfURL = BASE_URL + '/api/pdf/' + saveKey
   useEffect(() => {
     const getBlob = async () => {
-      const blob = await fetch(imageURL).then((r) => r.blob());
+      const blob = await fetch(imageSrc).then((r) => r.blob());
       setBlob(blob);
     };
     getBlob().catch(console.error);
-  }, [isImageLoaded, imageURL]);
+  }, [isImageLoaded, imageSrc]);
 
   useEffect(() => {
-    setImageSrc(saveKey ?? "_");
-  }, [saveKey]);
+    setImageSrc(`/${year}/png/${saveKey ?? "_"}`);
+  }, [saveKey, year]);
 
   const shareData = {
     title: `kodigo.me 🗳 | My Preferred Candidates for ${shortName}`,
@@ -113,8 +114,9 @@ export const ShareContents = ({
       </p>
       <div className="border text-center">
         <Image
-          loader={cloudinaryLoader}
+          // loader={cloudinaryLoader}
           src={imageSrc}
+          // src={imageURL}
           alt={
             isUpperFold
               ? "Generated kodigo from kodigo.me | Did the image fail to load? Please try refreshing the page."
@@ -163,10 +165,11 @@ export const ShareContents = ({
                 <div className="rounded-md shadow-sm sm:flex">
                   <SaveImageButton
                     id={saveKey}
+                    src={imageSrc}
                     blob={blob}
                   />
                   <PrintButton
-                    pdfURL={imageURL}
+                    pdfURL={imageSrc}
                     id={saveKey}
                   />
                 </div>
@@ -224,6 +227,7 @@ export const ShareContents = ({
               <CopyPasteKodigo
                 saveKey={saveKey}
                 url={shareURL}
+                megapack={megapack}
               />
             </div>
           </div>
@@ -266,7 +270,7 @@ const ShareURL = ({ url }: { url: string }) => {
             type="text"
             name="shareURL"
             id="shareURL"
-            className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-none rounded-l-md border-gray-300 pl-8 text-xs sm:pl-10 sm:text-sm"
+            className="block w-full rounded-none rounded-l-md border-gray-300 pl-8 text-xs focus:border-primary-500 focus:ring-primary-500 sm:pl-10 sm:text-sm"
             placeholder="Share URL"
             defaultValue={url}
             ref={linkRef}
@@ -275,7 +279,7 @@ const ShareURL = ({ url }: { url: string }) => {
         </div>
         <button
           type="button"
-          className="focus:border-primary-500 focus:ring-primary-500 relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-1 sm:text-sm"
+          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-100 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 sm:text-sm"
           onClick={() => {
             requestAnimationFrame(() => {
               if (linkRef && linkRef.current) {
