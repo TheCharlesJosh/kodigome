@@ -4,7 +4,7 @@ import { BASE_URL } from "./constants";
 export function generatePageMeta({
   title,
   description,
-  image = "/main-meta.png",
+  image = "/images/kodigo-me-meta.png",
 }: {
   title: string;
   description: string;
@@ -24,8 +24,8 @@ export function generatePageMeta({
       images: [
         {
           url: image,
-          width: 1917,
-          height: 960,
+          width: 1337,
+          height: 700,
         },
       ],
     },
@@ -36,8 +36,8 @@ export function generatePageMeta({
       images: [
         {
           url: image,
-          width: 1917,
-          height: 960,
+          width: 1337,
+          height: 700,
         },
       ],
     },

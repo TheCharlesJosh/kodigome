@@ -25,10 +25,8 @@ export const SidebarRedux = ({
     <>
       <LinkBox
         as="div"
-        className={cn(
-          "transition-opacity",
-          mainLogoVisible ? "opacity-0" : "opacity-100"
-        )}
+        className={cn("opacity-0 transition-opacity")}
+        style={{ opacity: mainLogoVisible ? 0 : 1 }}
       >
         <LinkOverlay href="/">
           <h2 className="sr-only">kodigo.me</h2>
@@ -40,7 +38,7 @@ export const SidebarRedux = ({
           />
         </LinkOverlay>
       </LinkBox>
-      <h3 className="text-primary-600 text-base font-semibold uppercase tracking-wide">
+      <h3 className="text-base font-semibold uppercase tracking-wide text-primary-600">
         Create Your Own Election Kodigo
       </h3>
       <h3 className="text-sm uppercase tracking-wide">{byLine()}</h3>
@@ -78,10 +76,8 @@ const Sidebar = ({
     <>
       <LinkBox
         as="div"
-        className={cn(
-          "transition-opacity",
-          mainLogoVisible ? "opacity-0" : "opacity-100"
-        )}
+        className={cn("opacity-0 transition-opacity")}
+        style={{ opacity: mainLogoVisible ? 0 : 1 }}
       >
         <LinkOverlay href="/">
           <h2 className="sr-only">kodigo.me</h2>
@@ -93,7 +89,7 @@ const Sidebar = ({
           />
         </LinkOverlay>
       </LinkBox>
-      <h3 className="text-primary-600 text-base font-semibold uppercase tracking-wide">
+      <h3 className="text-base font-semibold uppercase tracking-wide text-primary-600">
         Create Your Own Election Kodigo
       </h3>
       <h3 className="text-sm uppercase tracking-wide">

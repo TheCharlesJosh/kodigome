@@ -4,14 +4,18 @@ import { HiDotsHorizontal } from "react-icons/hi";
 
 export const WebShareButton = ({
   link,
+  title,
+  text,
   blob,
 }: {
   link: string;
+  title: string;
+  text: string;
   blob?: Blob;
 }) => {
   const shareData = {
-    title: "kodigo.me | Preferred Candidates",
-    text: "I just created my own Kodigo for PH Elections 2022.",
+    title,
+    text,
     files: [] as File[],
     url: link,
   };

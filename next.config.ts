@@ -30,6 +30,10 @@ const nextConfig: NextConfig = {
         source: "/api/png/:path*",
         destination: "/2022/png",
       },
+      {
+        source: "/api/og/:path*",
+        destination: "/2022/og",
+      },
     ];
   },
   async redirects() {
@@ -54,21 +58,11 @@ const nextConfig: NextConfig = {
         destination: "/2022/:id*",
         permanent: true,
       },
-      // {
-      //   source: "/api/og/:id*",
-      //   destination: "/2022/og/:id*",
-      //   permanent: true,
-      // },
       {
         source: "/api/pdf/:id*",
         destination: "/2022/pdf/:id*",
         permanent: true,
       },
-      // {
-      //   source: "/api/png/:id*",
-      //   destination: "/2022/png/:id*",
-      //   permanent: true,
-      // },
     ];
   },
 };

@@ -1,11 +1,20 @@
 // import { createTailwindConverter } from "@/lib/utils";
 import { ImageResponse } from "@vercel/og";
 import processDataForImage, {
-  EmptyInvalidKodigo,
+  EmptyInvalidKodigoOG,
   ImageProcessError,
   imageResponseSettings,
-} from "./logic";
-import { CandidateList, Footer, Header } from "./image-components";
+} from "../../png/[[...id]]/logic";
+import {
+  CandidateList,
+  Header,
+  LeftMeta,
+} from "../../png/[[...id]]/image-components";
+
+export const size = {
+  width: 1337,
+  height: 700,
+};
 
 export async function GET(
   _request: Request,
@@ -19,7 +28,7 @@ export async function GET(
       case ImageProcessError.INVALID_YEAR:
       case ImageProcessError.NO_ID_PROVIDED:
       case ImageProcessError.EMPTY_KODIGO:
-        return new Response(EmptyInvalidKodigo, {
+        return new Response(EmptyInvalidKodigoOG, {
           headers: {
             "Content-Type": `image/png`,
             "Cache-Control": `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
@@ -32,7 +41,7 @@ export async function GET(
   }
 
   if (!data) {
-    return new Response(EmptyInvalidKodigo, {
+    return new Response(EmptyInvalidKodigoOG, {
       headers: {
         "Content-Type": `image/png`,
         "Cache-Control": `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
@@ -46,9 +55,13 @@ export async function GET(
 
   const image = new ImageResponse(
     (
-      <div tw="flex bg-white w-[720px] h-[720px] p-4">
-        <div tw="flex h-full w-full flex-col">
-          <Header {...{ location, longName, qrcode, colors }} />
+      <div tw="flex bg-white w-[1337px] h-[700px] p-4">
+        <LeftMeta />
+        <div tw="flex h-full w-[669px] flex-col pt-8">
+          <Header
+            {...{ location, longName, qrcode, colors }}
+            og={true}
+          />
           <CandidateList
             candidates={candidates}
             nationalLocal={nationalLocal}
@@ -57,11 +70,14 @@ export async function GET(
             cutoff={23}
             megapack={megapack}
           />
-          <Footer />
         </div>
       </div>
     ),
-    imageResponseSettings
+    {
+      ...imageResponseSettings,
+      ...size,
+      // debug: true,
+    }
   );
 
   return image;

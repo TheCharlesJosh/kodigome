@@ -3,13 +3,14 @@ import { inter } from "@/lib/fonts";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 const APP_NAME = "kodigo.me";
 const SITE_TITLE = "kodigo.me 🗳 | PH Election Ballot Kodigo Generator";
 const SITE_TITLE_TEMPLATE = "%s - kodigo.me 🗳";
 const SITE_DESCRIPTION =
   "Create your own kodigo ahead of time so that you can save time voting on election day. 🇵🇭";
-const SITE_IMAGE = "/main-meta.png";
+const SITE_IMAGE = "/kodigo-me-meta.png";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -64,14 +65,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} scroll-smooth antialiased`}>
+      <body
+        className={cn(inter.variable, "scroll-smooth antialiased")}
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>

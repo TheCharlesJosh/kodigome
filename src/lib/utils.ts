@@ -6,7 +6,7 @@ const twMergeConfig = {
   extend: {
     theme: {
       spacing: ["8xl"],
-      color: ["odd-2022", "even-2022", "odd-2025", "even-2025", "primary"],
+      color: ["primary"],
     },
     classGroups: {
       "font-family": [
@@ -20,7 +20,7 @@ const twMergeConfig = {
 
 defaultConfig.twMergeConfig = twMergeConfig;
 
-const customTwMerge = extendTailwindMerge(twMergeConfig);
+const customTwMerge = extendTailwindMerge<"years">(twMergeConfig);
 
 export function cn(...inputs: ClassValue[]): string {
   return customTwMerge(clsx(inputs));

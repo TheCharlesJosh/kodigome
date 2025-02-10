@@ -10,6 +10,10 @@ import { encodeForSharing } from "@/lib/for-sharing";
 import { toast, ToastContainer } from "react-toastify";
 import { cn } from "@/lib/utils";
 
+const COLORS_BY_YEAR = ["primary-2025", "primary-2022"];
+const setPageColorByYear = (year: string) =>
+  COLORS_BY_YEAR.find((yearColor) => yearColor.includes(year));
+
 export default function BallotPage({
   initialValues = {},
   sharePage = false,
@@ -17,7 +21,6 @@ export default function BallotPage({
   pageType = "main",
   megapack,
   error,
-  className = "",
 }: {
   initialValues?: CandidateGroupValuesWithUser;
   sharePage?: boolean;
@@ -73,8 +76,17 @@ export default function BallotPage({
     }
   }, [error]);
 
+  const pageColorByYear = setPageColorByYear(megapack.year);
+
+  useEffect(() => {
+    if (pageColorByYear) {
+      document.body.classList.add(pageColorByYear);
+    }
+    return () => document.body.classList.remove(...COLORS_BY_YEAR);
+  }, [pageColorByYear]);
+
   return (
-    <div className={cn("bg-white", className)}>
+    <div className={cn("bg-white", pageColorByYear)}>
       <ToastContainer
         position="bottom-left"
         autoClose={5000}
@@ -91,7 +103,6 @@ export default function BallotPage({
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           className="mx-auto max-w-8xl px-4 py-4 sm:px-6 xl:flex xl:gap-x-8 xl:px-8 xl:py-0"
-          // className="mx-auto max-w-8xl py-4 px-4 sm:px-6 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:py-0 lg:px-8"
         >
           <div className="hidden pt-4 xl:sticky xl:top-0 xl:flex xl:h-screen xl:basis-3/12 xl:flex-col xl:overflow-auto">
             <Sidebar

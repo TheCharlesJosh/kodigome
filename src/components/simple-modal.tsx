@@ -64,7 +64,7 @@ const SimpleModal: FunctionComponent<SimpleModalProps> = (props) => {
         initialFocus={cancelButtonRef}
         onClose={setOpenModal}
       >
-        <div className="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0">
+        <div className="flex min-h-screen items-end justify-center p-0 text-center sm:block sm:p-0 md:p-4 md:pb-20">
           <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
@@ -93,7 +93,7 @@ const SimpleModal: FunctionComponent<SimpleModalProps> = (props) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:align-middle">
+            <div className="inline-block transform overflow-hidden bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:rounded-lg sm:align-middle">
               <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <IconChanger modalType={modalType} />
@@ -109,12 +109,12 @@ const SimpleModal: FunctionComponent<SimpleModalProps> = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row sm:px-6">
+              <div className="border-t bg-slate-50 px-4 py-3 sm:flex sm:flex-row sm:px-6">
                 {/* <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-2 sm:px-6"> */}
                 {negativeMessage && (
                   <button
                     type="button"
-                    className="focus:ring-primary-500 inline-flex w-full items-center justify-center rounded-md border border-gray-300 border-transparent bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:flex-grow sm:text-sm"
+                    className="inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:flex-grow sm:text-sm"
                     onClick={handleNegative}
                   >
                     {/* bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 */}
@@ -124,7 +124,7 @@ const SimpleModal: FunctionComponent<SimpleModalProps> = (props) => {
                 {positiveMessage && (
                   <button
                     type="button"
-                    className="border-primary-300 bg-primary-500 hover:bg-primary-700 focus:ring-primary-500 mt-3 inline-flex w-full items-center justify-center rounded-md border px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:mt-0 sm:w-auto sm:flex-grow sm:text-sm"
+                    className="mt-3 inline-flex w-full items-center justify-center rounded-md border border-primary-300 bg-primary-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:ml-3 sm:mt-0 sm:w-auto sm:flex-grow sm:text-sm"
                     onClick={handlePositive}
                     ref={cancelButtonRef}
                   >

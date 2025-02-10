@@ -39,6 +39,10 @@ export const EmptyInvalidKodigo = await readFile(
   join(process.cwd(), "/public/images/error-kodigo-empty.png")
 );
 
+export const EmptyInvalidKodigoOG = await readFile(
+  join(process.cwd(), "/public/images/kodigo-me-meta.png")
+);
+
 /**
  * Next.js 15 and ImageResponse makes a funny error:
  * code: 'ERR_INTERNAL_ASSERTION'
@@ -119,6 +123,7 @@ export type ImageProcessData = {
   nationalLocal: Candidates;
   candidates: CandidateGroupValues;
   megapack: MegapackType;
+  id: string;
 };
 
 export default async function processDataForImage(
@@ -133,7 +138,6 @@ export default async function processDataForImage(
   const megapack = await getMegapack(year);
   const { national, localMapping, yearCode } = megapack;
 
-  // TODO: If there's no ID provided, return an image instead of a 404
   if (
     !Array.isArray(idArray) ||
     (Array.isArray(idArray) && idArray.length === 0)
@@ -149,15 +153,18 @@ export default async function processDataForImage(
 
   const { user, ...candidates } = data ?? { user: {} };
 
-  // TODO: If data returned an invalid object, return a 404
   if (!candidates || Object.keys(data).length === 0) {
     return [null, ImageProcessError.EMPTY_KODIGO] as [null, ImageProcessError];
   }
 
   const location =
-    user && user?.Province && user?.["City/Municipality"]
-      ? `${user?.Province} • ${user?.["City/Municipality"]}`
+    user && user.Province && user["City/Municipality"]
+      ? `${user.Province} • ${user["City/Municipality"]}`
       : "";
+
+  if (location === "") {
+    return [null, ImageProcessError.EMPTY_KODIGO] as [null, ImageProcessError];
+  }
 
   const qrcode = await toDataURL(`${BASE_URL}/${year}/${id}`);
 
@@ -173,8 +180,8 @@ export default async function processDataForImage(
 
   const nationalLocal = { ...national, ...local };
 
-  return [{ location, qrcode, nationalLocal, candidates, megapack }, null] as [
-    ImageProcessData,
+  return [
+    { location, qrcode, nationalLocal, candidates, megapack, id },
     null,
-  ];
+  ] as [ImageProcessData, null];
 }

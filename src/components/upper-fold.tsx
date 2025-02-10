@@ -1,8 +1,8 @@
 import logo from "../assets/logo.svg";
 import Image from "next/image";
-import { isValidElement, ReactNode, RefObject } from "react";
+import { ReactNode, RefObject } from "react";
 import { HiOutlineArrowDown, HiOutlineInformationCircle } from "react-icons/hi";
-import { ShareContents } from "./ShareDialog";
+import { ShareContents } from "./share-dialog";
 import { LinkBox, LinkOverlay } from "./link-overlay";
 import { Instructions } from "./instructions";
 import Link from "next/link";
@@ -112,7 +112,7 @@ const UpperFold = ({
         <a
           href="#national"
           type="button"
-          className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 inline-flex items-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="inline-flex items-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         >
           <HiOutlineArrowDown
             className="-ml-1 mr-3 h-5 w-5 animate-bounce"
@@ -125,19 +125,19 @@ const UpperFold = ({
         <div className="flex">
           <div className="flex-shrink-0">
             <HiOutlineInformationCircle
-              className="text-primary-400 h-5 w-5"
+              className="h-5 w-5 text-primary-400"
               aria-hidden="true"
             />
           </div>
           <div className="ml-3 flex-1 md:flex md:justify-between">
             <p className="text-xs text-gray-700 md:text-sm">
-              <span className="text-primary-600 font-bold">
+              <span className="font-bold text-primary-600">
                 Heads up! You keep full ownership of your data and your kodigo.{" "}
               </span>
               kodigo.me does not store any personal information, nor any
               information you key in. kodigo.me is not affiliated with COMELEC,
               any political party, or any media institution.{" "}
-              <span className="text-primary-600 font-bold">
+              <span className="font-bold text-primary-600">
                 This is not a survey. This is not an official ballot.
               </span>
             </p>
