@@ -1,5 +1,6 @@
 import { BASE_URL } from "@/lib/constants";
-import { promises as fs } from "fs";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import getMegapack, { isValidYear } from "@/lib/megapack";
 import { decodeForSharing } from "@/lib/for-sharing";
 import { toDataURL } from "qrcode";
@@ -34,6 +35,10 @@ export const lineBreaker = (line: string, limit: number) => {
 export type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 export type Style = "normal" | "italic";
 
+export const EmptyInvalidKodigo = await readFile(
+  join(process.cwd(), "/public/images/error-kodigo-empty.png")
+);
+
 /**
  * Next.js 15 and ImageResponse makes a funny error:
  * code: 'ERR_INTERNAL_ASSERTION'
@@ -57,17 +62,17 @@ export type Style = "normal" | "italic";
  * Lesson learned: Do not use a variable font.
  */
 
-const InterBuffer = await fs.readFile(
-  process.cwd() + "/src/app/[year]/png/[[...id]]/Inter-Regular.ttf"
+const InterBuffer = await readFile(
+  join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-Regular.ttf")
 );
-const InterBoldBuffer = await fs.readFile(
-  process.cwd() + "/src/app/[year]/png/[[...id]]/Inter-Bold.ttf"
+const InterBoldBuffer = await readFile(
+  join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-Bold.ttf")
 );
-const InterSemiBoldBuffer = await fs.readFile(
-  process.cwd() + "/src/app/[year]/png/[[...id]]/Inter-SemiBold.ttf"
+const InterSemiBoldBuffer = await readFile(
+  join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-SemiBold.ttf")
 );
-const InterExtraBoldBuffer = await fs.readFile(
-  process.cwd() + "/src/app/[year]/png/[[...id]]/Inter-ExtraBold.ttf"
+const InterExtraBoldBuffer = await readFile(
+  join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-ExtraBold.ttf")
 );
 
 export const imageResponseSettings = {
@@ -105,63 +110,71 @@ export const imageResponseSettings = {
 export enum ImageProcessError {
   INVALID_YEAR,
   NO_ID_PROVIDED,
-  EMPTY_KODIGO
+  EMPTY_KODIGO,
 }
-
 
 export type ImageProcessData = {
   location: string;
-  qrcode: string,
-  nationalLocal: Candidates, 
-  candidates: CandidateGroupValues,
-  megapack: MegapackType
-}
+  qrcode: string;
+  nationalLocal: Candidates;
+  candidates: CandidateGroupValues;
+  megapack: MegapackType;
+};
 
-export default async function processDataForImage (year: string, idArray: string[]) {
-    // If year does not exist from the mapping, return 404:
-    if (!isValidYear(year)) {
-      return [null, ImageProcessError.INVALID_YEAR] as [null, ImageProcessError];
-    }
-  
-    const megapack = await getMegapack(year);
-    const { longName, national, localMapping, yearCode, colors } = megapack;
-  
-    // TODO: If there's no ID provided, return an image instead of a 404
-    if (
-      !Array.isArray(idArray) ||
-      (Array.isArray(idArray) && idArray.length === 0)
-    ) {
-      return [null, ImageProcessError.NO_ID_PROVIDED]  as [null, ImageProcessError];
-    }
-  
-    const id = idArray[0];
-    const data = await decodeForSharing(id, megapack);
-  
-    const { user, ...candidates } = data ?? { user: {} };
-    
-    // TODO: If data returned an invalid object, return a 404
-    if (!candidates || Object.keys(data).length === 0) {
-      return [null, ImageProcessError.EMPTY_KODIGO] as [null, ImageProcessError]
-    }
+export default async function processDataForImage(
+  year: string,
+  idArray: string[]
+) {
+  // If year does not exist from the mapping, return 404:
+  if (!isValidYear(year)) {
+    return [null, ImageProcessError.INVALID_YEAR] as [null, ImageProcessError];
+  }
 
-    const location =
-      user && user?.Province && user?.["City/Municipality"]
-        ? `${user?.Province} • ${user?.["City/Municipality"]}`
-        : "";
-  
-    const qrcode = await toDataURL(`${BASE_URL}/${year}/${id}`);
-  
-    const cityMuni = localMapping.find(
-      (mapEntry) =>
-        mapEntry.province === user?.Province &&
-        mapEntry.cityMunicipality === user?.["City/Municipality"]
-    );
-  
-    const local: LocalCandidatesType = cityMuni
-      ? (await import(`@/assets/${yearCode}/json/${cityMuni.identifier}`)).default
-      : {};
-  
-    const nationalLocal = { ...national, ...local };
-  
-    return [{ location, qrcode, nationalLocal, candidates, megapack }, null] as [ImageProcessData, null]
+  const megapack = await getMegapack(year);
+  const { national, localMapping, yearCode } = megapack;
+
+  // TODO: If there's no ID provided, return an image instead of a 404
+  if (
+    !Array.isArray(idArray) ||
+    (Array.isArray(idArray) && idArray.length === 0)
+  ) {
+    return [null, ImageProcessError.NO_ID_PROVIDED] as [
+      null,
+      ImageProcessError,
+    ];
+  }
+
+  const id = idArray[0];
+  const data = await decodeForSharing(id, megapack);
+
+  const { user, ...candidates } = data ?? { user: {} };
+
+  // TODO: If data returned an invalid object, return a 404
+  if (!candidates || Object.keys(data).length === 0) {
+    return [null, ImageProcessError.EMPTY_KODIGO] as [null, ImageProcessError];
+  }
+
+  const location =
+    user && user?.Province && user?.["City/Municipality"]
+      ? `${user?.Province} • ${user?.["City/Municipality"]}`
+      : "";
+
+  const qrcode = await toDataURL(`${BASE_URL}/${year}/${id}`);
+
+  const cityMuni = localMapping.find(
+    (mapEntry) =>
+      mapEntry.province === user?.Province &&
+      mapEntry.cityMunicipality === user?.["City/Municipality"]
+  );
+
+  const local: LocalCandidatesType = cityMuni
+    ? (await import(`@/assets/${yearCode}/json/${cityMuni.identifier}`)).default
+    : {};
+
+  const nationalLocal = { ...national, ...local };
+
+  return [{ location, qrcode, nationalLocal, candidates, megapack }, null] as [
+    ImageProcessData,
+    null,
+  ];
 }

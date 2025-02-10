@@ -74,7 +74,7 @@ export default function BallotPage({
   }, [error]);
 
   return (
-    <div className={cn("bg-white p-4", className)}>
+    <div className={cn("bg-white", className)}>
       <ToastContainer
         position="bottom-left"
         autoClose={5000}

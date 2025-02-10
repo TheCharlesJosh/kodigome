@@ -1,6 +1,6 @@
 import logo from "../assets/logo.svg";
 import Image from "next/image";
-import { RefObject } from "react";
+import { isValidElement, ReactNode, RefObject } from "react";
 import { HiOutlineArrowDown, HiOutlineInformationCircle } from "react-icons/hi";
 import { ShareContents } from "./ShareDialog";
 import { LinkBox, LinkOverlay } from "./link-overlay";
@@ -9,20 +9,26 @@ import Link from "next/link";
 import { ValueProp } from "./value-prop";
 import { cn } from "@/lib/utils";
 import { MegapackType } from "@/lib/types";
+import { byLine } from "./sidebar/sidebar";
 
-const UpperFold = ({
+export const UpperFoldRedux = ({
   mainLogoRef,
   sharePage,
-  saveKey,
-  megapack,
+  longName,
+  children,
 }: {
   mainLogoRef: RefObject<HTMLDivElement | null>;
   sharePage?: boolean;
-  saveKey: string | null;
-  megapack: MegapackType;
+  longName?: string;
+  children?: ReactNode;
 }) => {
   return (
-    <div className="mb-4 flex w-full flex-col border-y-8 border-y-slate-300 bg-slate-200 pt-8 xl:mt-0 xl:items-center xl:px-8">
+    <div
+      className={cn(
+        "mb-4 flex w-full flex-col border-y-8 border-y-slate-300 bg-slate-200 py-8 xl:mt-0 xl:items-center xl:px-8",
+        children ? "pt-8" : "py-8"
+      )}
+    >
       <div
         className="w-full"
         ref={mainLogoRef}
@@ -49,8 +55,7 @@ const UpperFold = ({
             <>
               <ValueProp />
               <h2 className="mt-2 px-4 text-center text-xs uppercase tracking-wide md:text-sm">
-                2022 Philippine National and Local Elections | Free Kodigo
-                Generator
+                {byLine(longName)} | Free Kodigo Generator
               </h2>
             </>
           ) : (
@@ -65,7 +70,27 @@ const UpperFold = ({
           )}
         </div>
       </div>
+      {children}
+    </div>
+  );
+};
 
+const UpperFold = ({
+  mainLogoRef,
+  sharePage,
+  saveKey,
+  megapack,
+}: {
+  mainLogoRef: RefObject<HTMLDivElement | null>;
+  sharePage?: boolean;
+  saveKey: string | null;
+  megapack: MegapackType;
+}) => {
+  return (
+    <UpperFoldRedux
+      {...{ mainLogoRef, sharePage }}
+      longName={megapack.longName}
+    >
       {sharePage && (
         <ShareContents
           saveKey={saveKey}
@@ -127,7 +152,7 @@ const UpperFold = ({
           </div>
         </div>
       </div>
-    </div>
+    </UpperFoldRedux>
   );
 };
 

@@ -1,10 +1,10 @@
 "use client";
 import Footer from "@/components/footer";
 import { SidebarRedux } from "@/components/sidebar/sidebar";
-import { UpperHeader } from "@/components/upper-header";
 import { useRef, RefObject } from "react";
 import { useIntersection } from "react-use";
 import NotFoundContents from "./contents";
+import { UpperFoldRedux } from "@/components/upper-fold";
 
 export default function NotFound() {
   const mainLogoRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
@@ -27,7 +27,7 @@ export default function NotFound() {
           />
         </div>
         <div className="border-dashed border-gray-400 xl:basis-9/12 xl:border-l-8 xl:border-r-8">
-          <UpperHeader
+          <UpperFoldRedux
             mainLogoRef={mainLogoRef}
             sharePage={false}
           />

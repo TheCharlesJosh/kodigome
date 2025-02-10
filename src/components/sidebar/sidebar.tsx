@@ -11,6 +11,9 @@ import { SidebarLinks } from "@/components/sidebar/sidebar-links";
 import { CandidateGroupValuesWithUser, MegapackType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
+export const byLine = (longName?: string) =>
+  longName ?? "Philippine National and Local Elections";
+
 export const SidebarRedux = ({
   mainLogoVisible,
   pageType,
@@ -40,9 +43,7 @@ export const SidebarRedux = ({
       <h3 className="text-primary-600 text-base font-semibold uppercase tracking-wide">
         Create Your Own Election Kodigo
       </h3>
-      <h3 className="text-sm uppercase tracking-wide">
-        May 9, 2022 National and Local Elections
-      </h3>
+      <h3 className="text-sm uppercase tracking-wide">{byLine()}</h3>
       {!mainLogoVisible && (pageType === "main" || pageType === "share") && (
         <Instructions isSidebar={true} />
       )}
@@ -96,7 +97,7 @@ const Sidebar = ({
         Create Your Own Election Kodigo
       </h3>
       <h3 className="text-sm uppercase tracking-wide">
-        May 9, 2022 National and Local Elections
+        {byLine(megapack.longName)}
       </h3>
       {(pageType === "main" || pageType === "share") && (
         <div className={cn("my-4", ballotVisible ? "block" : "hidden")}>

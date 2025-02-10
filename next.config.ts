@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         pathname: "/*/png/**",
         search: "",
       },
+      {
+        pathname: "/images/**",
+        search: "",
+      },
     ],
     remotePatterns: [
       {
@@ -20,6 +24,14 @@ const nextConfig: NextConfig = {
     // domains: ["localhost", BASE_DOMAIN, "kodigo.me"],
   },
   poweredByHeader: false,
+  async rewrites() {
+    return [
+      {
+        source: "/api/png/:path*",
+        destination: "/2022/png",
+      },
+    ];
+  },
   async redirects() {
     return [
       {
@@ -42,21 +54,21 @@ const nextConfig: NextConfig = {
         destination: "/2022/:id*",
         permanent: true,
       },
-      {
-        source: "/api/og/:id*",
-        destination: "/2022/og/:id*",
-        permanent: true,
-      },
+      // {
+      //   source: "/api/og/:id*",
+      //   destination: "/2022/og/:id*",
+      //   permanent: true,
+      // },
       {
         source: "/api/pdf/:id*",
         destination: "/2022/pdf/:id*",
         permanent: true,
       },
-      {
-        source: "/api/png/:id*",
-        destination: "/2022/png/:id*",
-        permanent: true,
-      },
+      // {
+      //   source: "/api/png/:id*",
+      //   destination: "/2022/png/:id*",
+      //   permanent: true,
+      // },
     ];
   },
 };

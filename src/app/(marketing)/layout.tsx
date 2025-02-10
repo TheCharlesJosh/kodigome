@@ -1,9 +1,9 @@
 "use client";
-import { UpperHeader } from "@/components/upper-header";
 import Footer from "@/components/footer";
 import { SidebarRedux } from "@components/sidebar/sidebar";
 import { ReactNode, RefObject, useRef } from "react";
 import { useIntersection } from "react-use";
+import { UpperFoldRedux } from "@/components/upper-fold";
 
 export default function MdxLayout({ children }: { children: ReactNode }) {
   const mainLogoRef = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
@@ -26,7 +26,7 @@ export default function MdxLayout({ children }: { children: ReactNode }) {
           />
         </div>
         <div className="border-dashed border-gray-400 xl:basis-9/12 xl:border-l-8 xl:border-r-8">
-          <UpperHeader
+          <UpperFoldRedux
             mainLogoRef={mainLogoRef}
             sharePage={false}
           />
