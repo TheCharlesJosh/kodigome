@@ -6,6 +6,8 @@ import { Metadata } from "next";
 import getMegapack, { isValidYear } from "@/lib/megapack";
 import { BASE_URL } from "@/lib/constants";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return Object.keys(yearPack).map((yearCode) => ({
     year: yearCode,

@@ -76,7 +76,9 @@ export const ShareContents = ({
   const [isImageError, setImageError] = useState(false);
   const [imageSrc, setImageSrc] = useState(`/${year}/png/${saveKey ?? "_"}`);
 
-  const shareURL = BASE_URL + `/${year}/` + saveKey;
+  const shareURL = `${BASE_URL}/${year}/${saveKey}`;
+  const imageURL = `/${year}/png/${saveKey ?? "_"}`;
+
   useEffect(() => {
     const getBlob = async () => {
       const blob = await fetch(imageSrc).then((r) => r.blob());
@@ -87,8 +89,8 @@ export const ShareContents = ({
 
   useEffect(() => {
     setImageLoaded(false);
-    setImageSrc(`/${year}/png/${saveKey ?? "_"}`);
-  }, [saveKey, year]);
+    setImageSrc(imageURL);
+  }, [imageURL, year]);
 
   const shareData = {
     title: `kodigo.me 🗳 | My Preferred Candidates for ${shortName}`,
@@ -111,6 +113,7 @@ export const ShareContents = ({
       <div className="border text-center">
         <Image
           src={imageSrc}
+          unoptimized={true}
           className="mx-auto"
           alt={
             isUpperFold
@@ -159,10 +162,7 @@ export const ShareContents = ({
                     src={imageSrc}
                     blob={blob}
                   />
-                  <PrintButton
-                    pdfURL={imageSrc}
-                    id={saveKey}
-                  />
+                  <PrintButton pdfURL={imageSrc} />
                 </div>
               </div>
               <div className="mt-2 flex items-center justify-center gap-2 rounded-r-md border border-gray-300 bg-white p-2 lg:-ml-1">

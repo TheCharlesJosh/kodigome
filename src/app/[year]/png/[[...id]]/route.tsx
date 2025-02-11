@@ -22,7 +22,7 @@ export async function GET(
         return new Response(EmptyInvalidKodigo, {
           headers: {
             "Content-Type": `image/png`,
-            "Cache-Control": `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
+            // "Cache-Control": `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
           },
           status: 404,
         });
@@ -35,7 +35,7 @@ export async function GET(
     return new Response(EmptyInvalidKodigo, {
       headers: {
         "Content-Type": `image/png`,
-        "Cache-Control": `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
+        // "Cache-Control": `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
       },
       status: 404,
     });
