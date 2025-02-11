@@ -77,10 +77,14 @@ export default function BallotPage({
   const pageColorByYear = pageColor();
 
   useEffect(() => {
-    if (pageColorByYear) {
+    if (pageColorByYear && typeof document !== undefined) {
       document.body.classList.add(pageColorByYear);
     }
-    return () => document.body.classList.remove(pageColorByYear);
+    return () => {
+      if (typeof document !== undefined) {
+        document.body.classList.remove(pageColorByYear);
+      }
+    };
   }, [pageColorByYear]);
 
   return (
