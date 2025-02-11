@@ -6,14 +6,16 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+
+# Copy patches from patch-package
 COPY patches ./patches
+
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci --include=dev; \
+  elif [ -f package-lock.json ]; then NODE_ENV=development npm install; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
 
 # Rebuild the source code only when needed
 FROM node:20-alpine AS builder
@@ -22,8 +24,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Setup environment variables
-ARG NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
-ARG NEXT_PUBLIC_PRODUCTION=${NEXT_PUBLIC_PRODUCTION}
+# ARG NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+# ARG NEXT_PUBLIC_PRODUCTION=${NEXT_PUBLIC_PRODUCTION}
 
 ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
 ENV NEXT_PUBLIC_PRODUCTION=${NEXT_PUBLIC_PRODUCTION}
@@ -45,7 +47,7 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -63,6 +65,6 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
 CMD ["node", "server.js"]
