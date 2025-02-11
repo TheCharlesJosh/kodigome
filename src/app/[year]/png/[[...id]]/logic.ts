@@ -158,7 +158,12 @@ export default async function processDataForImage(
       ? `${user.Province} • ${user["City/Municipality"]}`
       : "";
 
-  if (!candidates && location === "") {
+  if (
+    candidates &&
+    data.constructor === Object &&
+    Object.keys(candidates).length === 0 &&
+    location === ""
+  ) {
     return [null, ImageProcessError.EMPTY_KODIGO] as [null, ImageProcessError];
   }
 

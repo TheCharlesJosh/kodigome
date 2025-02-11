@@ -75,10 +75,10 @@ export const ShareContents = ({
   const [blob, setBlob] = useState<Blob>();
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [isImageError, setImageError] = useState(false);
-  const [imageSrc, setImageSrc] = useState(`/${year}/png/${saveKey ?? "_"}`);
+  const [imageSrc, setImageSrc] = useState(`/${year}/png/${saveKey ?? ""}`);
 
-  const shareURL = `${BASE_URL}/${year}/${saveKey}`;
-  const imageURL = `/${year}/png/${saveKey ?? "_"}`;
+  const shareURL = `${BASE_URL}/${year}/${saveKey ?? ""}`;
+  const imageURL = `/${year}/png/${saveKey ?? ""}`;
 
   useEffect(() => {
     const getBlob = async () => {

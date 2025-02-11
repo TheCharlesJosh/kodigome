@@ -35,7 +35,12 @@ export default function BallotPage({
 
   const onSubmit = async (data: CandidateGroupValuesWithUser) => {
     const key = await encodeForSharing(data, megapack);
-    setSaveKey(key);
+    if (key === "__8") {
+      toast.error("Your kodigo is empty. Make some choices and try again.");
+      setSaveKey(null);
+    } else {
+      setSaveKey(key);
+    }
   };
 
   const { isDirty } = useFormState({ control: methods.control });

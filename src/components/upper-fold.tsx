@@ -17,7 +17,7 @@ export const UpperFoldRedux = ({
   longName,
   children,
 }: {
-  mainLogoRef: RefObject<HTMLDivElement | null>;
+  mainLogoRef?: RefObject<HTMLDivElement | null>;
   sharePage?: boolean;
   longName?: string;
   children?: ReactNode;

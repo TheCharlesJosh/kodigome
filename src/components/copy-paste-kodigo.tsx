@@ -25,7 +25,7 @@ const CopyPasteKodigo = ({
     const decodeKey = async () => {
       if (saveKey) {
         const decoded = await decodeForSharing(saveKey, megapack);
-        const { betterPositionMap } = megapack;
+        const { betterPositionMap, year, shortName } = megapack;
 
         const { user, ...restOfValues } = decoded ?? { user: {} };
         const location =
@@ -60,12 +60,20 @@ const CopyPasteKodigo = ({
         startingText += "\n🗳 Check full kodigo at " + url;
 
         if (isEmpty) {
-          setKodigoText(
-            `🗳 Create your own kodigo for free at ${BASE_URL} 🇵🇭 `
-          );
+          if (location) {
+            setKodigoText(
+              `🗳 Check out the ${shortName} election ballot ${location ? "for " + location : ""} at ${BASE_URL}/${year}/${saveKey ?? ""} 🇵🇭`
+            );
+          } else {
+            setKodigoText(
+              `🗳 Create your own kodigo for free at ${BASE_URL} 🇵🇭`
+            );
+          }
         } else {
           setKodigoText(startingText);
         }
+      } else {
+        setKodigoText(`🗳 Create your own kodigo for free at ${BASE_URL} 🇵🇭`);
       }
     };
 
