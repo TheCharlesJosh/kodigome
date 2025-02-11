@@ -6,6 +6,7 @@ import { HiClipboardCopy } from "react-icons/hi";
 
 import { decodeForSharing } from "../lib/for-sharing";
 import { MegapackType } from "@/lib/types";
+import { BASE_URL } from "@/lib/constants";
 
 const CopyPasteKodigo = ({
   saveKey,
@@ -60,7 +61,7 @@ const CopyPasteKodigo = ({
 
         if (isEmpty) {
           setKodigoText(
-            "🗳 Create your own kodigo for free at https://kodigo.me 🇵🇭 "
+            `🗳 Create your own kodigo for free at ${BASE_URL} 🇵🇭 `
           );
         } else {
           setKodigoText(startingText);

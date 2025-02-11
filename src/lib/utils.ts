@@ -26,11 +26,6 @@ export function cn(...inputs: ClassValue[]): string {
   return customTwMerge(clsx(inputs));
 }
 
-/**
- * This is used to verify if the current Website is running on a Development Environment
- */
-export const IS_DEVELOPMENT = process.env.NODE_ENV === "development";
-
 export async function fetcher(...args: Parameters<typeof fetch>) {
   return (await fetch(...args)).json();
 }

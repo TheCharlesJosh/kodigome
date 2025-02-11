@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IS_DEVELOPMENT } from "../lib/constants";
+import { IS_DEVELOPMENT } from "@lib/constants";
 import { SidebarLinks } from "./sidebar/sidebar-links";
 import { CandidateGroupValuesWithUser } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -10,7 +10,7 @@ const Footer = ({ peek }: { peek?: CandidateGroupValuesWithUser }) => {
       <div className="mb-8 md:text-center">
         <Link
           href={"/"}
-          className="hover:text-primary-600 cursor-pointer font-bold text-gray-800"
+          className="cursor-pointer font-bold text-gray-800 hover:text-primary-600"
         >
           kodigo.me 🗳 • 2025 • 🇵🇭 Para Sa Bayan
         </Link>
