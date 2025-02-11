@@ -132,7 +132,6 @@ export default async function processDataForImage(
 ) {
   // If year does not exist from the mapping, return 404:
   if (!isValidYear(year)) {
-    console.log("here 1");
     return [null, ImageProcessError.INVALID_YEAR] as [null, ImageProcessError];
   }
 
@@ -143,7 +142,6 @@ export default async function processDataForImage(
     !Array.isArray(idArray) ||
     (Array.isArray(idArray) && idArray.length === 0)
   ) {
-    console.log("here 2");
     return [null, ImageProcessError.NO_ID_PROVIDED] as [
       null,
       ImageProcessError,
@@ -161,7 +159,6 @@ export default async function processDataForImage(
       : "";
 
   if (!candidates && location === "") {
-    console.log("here 3");
     return [null, ImageProcessError.EMPTY_KODIGO] as [null, ImageProcessError];
   }
 

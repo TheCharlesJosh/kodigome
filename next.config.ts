@@ -4,7 +4,7 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
 
-const scriptSiteList: string[] = [];
+const scriptSiteList: string[] = ["cdn.jsdelivr.net"];
 
 const styleSiteList: string[] = ["fonts.googleapis.com"];
 

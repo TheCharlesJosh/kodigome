@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import SimpleModal from "./simple-modal";
-import { toBase64, shimmer } from "../lib/loading-helpers";
 import { PrintButton } from "./print-button";
 import { SaveImageButton } from "./save-image-button";
 import { WebShareButton } from "./web-share-button";
@@ -28,6 +27,8 @@ import {
 import { BASE_URL } from "@lib/constants";
 import CopyPasteKodigo from "./copy-paste-kodigo";
 import { MegapackType } from "@/lib/types";
+import loadingAnim from "@public/kodigo-me-loading.json";
+import Lottie from "lottie-react";
 
 export const ShareDialog = ({
   openModal,
@@ -110,7 +111,15 @@ export const ShareContents = ({
               : 'Kodigo failed to load. Please go back by clicking "Edit kodigo" then click "Save/Share" again.'
             : "Please wait while we generate your kodigo."}
       </p>
-      <div className="border text-center">
+      <div className="relative h-[600px] w-[600px] border text-center">
+        {!isImageLoaded && (
+          <Lottie
+            animationData={loadingAnim}
+            className="absolute inset-0 bg-white"
+            loop
+            autoplay
+          />
+        )}
         <Image
           src={imageSrc}
           unoptimized={true}
@@ -121,11 +130,6 @@ export const ShareContents = ({
               : 'Generated kodigo from kodigo.me | Did the image fail to load? Please go back by clicking "Edit Kodigo" then click "Save/Share" again.'
           }
           key={"kodigo " + saveKey}
-          placeholder="blur"
-          blurDataURL={`data:image/svg+xml;base64,${toBase64(
-            // pacman(600, 600)
-            shimmer(600, 600)
-          )}`}
           onLoad={() => {
             setImageLoaded(true);
           }}
