@@ -1,6 +1,5 @@
 import { BASE_URL } from "@/lib/constants";
-// import { readFile } from "node:fs/promises";
-import fs from "fs-extra";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import getMegapack, { isValidYear } from "@/lib/megapack";
 import { decodeForSharing } from "@/lib/for-sharing";
@@ -36,11 +35,11 @@ export const lineBreaker = (line: string, limit: number) => {
 export type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 export type Style = "normal" | "italic";
 
-export const EmptyInvalidKodigo = await fs.readFile(
+export const EmptyInvalidKodigo = await readFile(
   join(process.cwd(), "/public/images/error-kodigo-empty.png")
 );
 
-export const EmptyInvalidKodigoOG = await fs.readFile(
+export const EmptyInvalidKodigoOG = await readFile(
   join(process.cwd(), "/public/images/kodigo-me-meta.png")
 );
 
@@ -67,16 +66,16 @@ export const EmptyInvalidKodigoOG = await fs.readFile(
  * Lesson learned: Do not use a variable font.
  */
 
-const InterBuffer = await fs.readFile(
+const InterBuffer = await readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-Regular.ttf")
 );
-const InterBoldBuffer = await fs.readFile(
+const InterBoldBuffer = await readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-Bold.ttf")
 );
-const InterSemiBoldBuffer = await fs.readFile(
+const InterSemiBoldBuffer = await readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-SemiBold.ttf")
 );
-const InterExtraBoldBuffer = await fs.readFile(
+const InterExtraBoldBuffer = await readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-ExtraBold.ttf")
 );
 

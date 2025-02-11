@@ -10,7 +10,7 @@ const SITE_TITLE = "kodigo.me 🗳 | PH Election Ballot Kodigo Generator";
 const SITE_TITLE_TEMPLATE = "%s - kodigo.me 🗳";
 const SITE_DESCRIPTION =
   "Create your own kodigo ahead of time so that you can save time voting on election day. 🇵🇭";
-const SITE_IMAGE = "/kodigo-me-meta.png";
+const SITE_IMAGE = "/images/kodigo-me-meta.png";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    locale: "en_PH",
     siteName: SITE_TITLE,
     title: {
       default: SITE_TITLE,

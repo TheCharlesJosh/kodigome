@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-// import { readFile } from "node:fs/promises";
-import fs from "fs-extra";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { CHAR_LIMIT, lineBreaker } from "./logic";
 import { BASE_URL } from "@/lib/constants";
@@ -8,11 +7,11 @@ import { overrideToEven } from "@/lib/style-variants";
 import { CandidateGroupValues, MegapackType, Candidates } from "@/lib/types";
 import { cn } from "@lib/utils";
 
-const logo = await fs.readFile(join(process.cwd(), "/public/logo.svg"), {
+const logo = await readFile(join(process.cwd(), "/public/logo.svg"), {
   encoding: "base64",
 });
 
-const metaSquare = await fs.readFile(
+const metaSquare = await readFile(
   join(process.cwd(), "/public/images/kodigo-me-meta-square.png"),
   {
     encoding: "base64",

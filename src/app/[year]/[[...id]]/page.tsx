@@ -42,6 +42,9 @@ export async function generateMetadata({
         return {
           title,
           description,
+          alternates: {
+            canonical: `${BASE_URL}/${year}/${id}`,
+          },
           openGraph: {
             images: [
               {
@@ -64,6 +67,16 @@ export async function generateMetadata({
       } else {
         return {};
       }
+    } else {
+      const title = `kodigo.me 🗳 | PH Election Ballot Kodigo Generator for ${megapack.shortName}`;
+      const description = `Create your own kodigo ahead of ${megapack.shortName} so that you can save time voting on election day. 🇵🇭`;
+      return {
+        title,
+        description,
+        alternates: {
+          canonical: `${BASE_URL}/${year}`,
+        },
+      };
     }
   }
 
