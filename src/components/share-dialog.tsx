@@ -101,7 +101,7 @@ export const ShareContents = ({
 
   return (
     <div className="mt-2">
-      <p className="mx-auto max-w-[602px] p-1 text-left text-sm text-gray-600">
+      <p className="mx-auto max-w-[602px] p-1 text-left text-xs text-gray-600 sm:text-sm">
         <HiOutlineInformationCircle className="-mt-1 mr-2 inline h-4 w-4" />
         {isImageLoaded
           ? "Scroll down to see save/share options."
@@ -111,7 +111,7 @@ export const ShareContents = ({
               : 'Kodigo failed to load. Please go back by clicking "Edit kodigo" then click "Save/Share" again.'
             : "Please wait while we generate your kodigo."}
       </p>
-      <div className="relative h-[600px] w-[600px] border text-center">
+      <div className="auto relative mx-auto max-w-[600px] border text-center">
         {!isImageLoaded && (
           <Lottie
             animationData={loadingAnim}

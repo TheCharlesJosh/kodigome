@@ -34,22 +34,20 @@ export const UpperFoldRedux = ({
         ref={mainLogoRef}
       >
         <div className="flex flex-col justify-center">
-          <div className="mx-auto w-52 xl:w-fit">
-            <LinkBox
-              as="div"
-              className="mx-auto w-52 xl:w-fit"
-            >
-              <LinkOverlay href="/">
-                <h1 className="sr-only">kodigo.me</h1>
-                <Image
-                  src={logo}
-                  width={300}
-                  height={53}
-                  alt="kodigo.me logo"
-                />
-              </LinkOverlay>
-            </LinkBox>
-          </div>
+          <LinkBox
+            as="div"
+            className="mx-auto xl:w-fit"
+          >
+            <LinkOverlay href="/">
+              <h1 className="sr-only">kodigo.me</h1>
+              <Image
+                src={logo}
+                width={300}
+                height={53}
+                alt="kodigo.me logo"
+              />
+            </LinkOverlay>
+          </LinkBox>
 
           {!sharePage ? (
             <>
@@ -61,7 +59,7 @@ export const UpperFoldRedux = ({
           ) : (
             <h2
               className={cn(
-                "mx-auto mt-0 flex-col items-center gap-x-2 text-xl xl:mt-0 xl:flex-row",
+                "mx-auto mt-0 flex-col items-center gap-x-2 text-center text-base sm:text-xl xl:mt-0 xl:flex-row",
                 !sharePage ? "hidden" : "flex"
               )}
             >
