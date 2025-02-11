@@ -6,6 +6,7 @@ export const overrideToEven = (position: string, year: string) =>
 export const candidateGroup = tv({
   slots: {
     base: "",
+    pageColor: "",
     primary: "bg-primary-600 text-white",
     chip: "bg-primary-800 text-primary-50",
     chipCircle: "text-primary-400",
@@ -20,8 +21,12 @@ export const candidateGroup = tv({
       even: "",
     },
     year: {
-      "2025": "",
-      "2022": "",
+      "2025": {
+        pageColor: "primary-2025",
+      },
+      "2022": {
+        pageColor: "primary-2022",
+      },
     },
   },
   compoundVariants: [

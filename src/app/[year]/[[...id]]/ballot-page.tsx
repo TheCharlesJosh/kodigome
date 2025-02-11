@@ -73,8 +73,8 @@ export default function BallotPage({
     }
   }, [error]);
 
-  const { base } = candidateGroup({ oddEven: "odd", year: megapack.year });
-  const pageColorByYear = base();
+  const { pageColor } = candidateGroup({ year: megapack.year });
+  const pageColorByYear = pageColor();
 
   useEffect(() => {
     if (pageColorByYear) {

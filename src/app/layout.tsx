@@ -4,6 +4,7 @@ import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
 
 const APP_NAME = "kodigo.me";
 const SITE_TITLE = "kodigo.me 🗳 | PH Election Ballot Kodigo Generator";
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">

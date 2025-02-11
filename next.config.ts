@@ -123,12 +123,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.devtool = "source-map";
-    }
-    return config;
-  },
 };
 
 const withMDX = createMDX({
