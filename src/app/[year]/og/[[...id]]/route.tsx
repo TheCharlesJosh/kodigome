@@ -11,7 +11,7 @@ import {
   LeftMeta,
 } from "../../png/[[...id]]/image-components";
 
-export const size = {
+const size = {
   width: 1337,
   height: 700,
 };

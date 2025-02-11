@@ -2,7 +2,7 @@ import Image from "next/image";
 import { BaseSyntheticEvent } from "react";
 import { FieldValues, UseFormReset } from "react-hook-form";
 import { StartOverButton } from "@/components/start-over-button";
-import logo from "@assets/logo.svg";
+import logo from "@public/logo.svg";
 import { SaveShareButton } from "@/components/save-share-button";
 import { LinkBox, LinkOverlay } from "@/components/link-overlay";
 import { Instructions } from "@/components/instructions";

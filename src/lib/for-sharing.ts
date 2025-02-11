@@ -1,3 +1,4 @@
+import { BASE_URL } from "./constants";
 import {
   CandidateGroupValuesWithUser,
   CityMuni,
@@ -155,10 +156,14 @@ export async function decodeForSharing(
 
   try {
     if (cityMuniHit) {
-      const localListRaw = await import(
-        `@/assets/${yearCode}/json/${cityMuniHit}.json`
+      // const localListRaw = await import(
+      //   `@/../public/assets/${yearCode}/json/${cityMuniHit}.json`
+      // );
+      // localList = localListRaw.default;
+      const listRaw = await fetch(
+        `${BASE_URL}/years/${yearCode}/${cityMuniHit}.json`
       );
-      localList = localListRaw.default;
+      localList = await listRaw.json();
     }
   } catch (error) {
     console.error(error);

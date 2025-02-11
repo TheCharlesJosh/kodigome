@@ -1,4 +1,6 @@
+/** @type {import('next').NextConfig} */
 import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
 
@@ -70,16 +72,16 @@ const nextConfig: NextConfig = {
 const withMDX = createMDX({
   options: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    // rehypePlugins: [],
   },
 
   // Add markdown plugins here, as desired
 });
 
-// const withBundleAnalyzer = require("@next/bundle-analyzer")({
-//   enabled: process.env.ANALYZE === "true",
-// });
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
-// export default withBundleAnalyzer(withMDX(nextConfig));
+export default withBundleAnalyzer(withMDX(nextConfig));
 
-export default withMDX(nextConfig);
+// export default withMDX(nextConfig);

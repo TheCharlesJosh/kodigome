@@ -4,6 +4,7 @@ import { ComboboxWrapper } from "./combobox-wrapper";
 import { CandidateGroup } from "./candidate-group";
 import { useFormContext } from "react-hook-form";
 import { LocalCandidatesType, MegapackType, PositionEnum } from "@/lib/types";
+import { BASE_URL } from "@/lib/constants";
 
 export const LocalCandidates = ({ megapack }: { megapack: MegapackType }) => {
   const { localMapping, year, yearCode, provincesCitiesMunicipalities } =
@@ -49,11 +50,16 @@ export const LocalCandidates = ({ megapack }: { megapack: MegapackType }) => {
   useEffect(() => {
     const getLocal = async () => {
       if (cityMuni) {
-        const list = await import(
-          `@/assets/${yearCode}/json/${cityMuni.identifier}.json`
+        // const list = await import(
+        // `@/../public/assets/${yearCode}/json/${cityMuni.identifier}.json`
+        // );
+        // setLocalList(list.default);
+        const listRaw = await fetch(
+          `${BASE_URL}/years/${yearCode}/${cityMuni.identifier}.json`
         );
+        const list = await listRaw.json();
 
-        setLocalList(list.default);
+        setLocalList(list);
       }
     };
 

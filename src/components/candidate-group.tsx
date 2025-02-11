@@ -20,8 +20,6 @@ import startCase from "lodash.startcase";
 import { Scrollbar } from "react-scrollbars-custom";
 import { cn } from "@/lib/utils";
 import { candidateGroup, overrideToEven } from "@/lib/style-variants";
-// import { useReward } from "react-rewards";
-// import { useThrottleFn } from "react-use";
 import Confetti from "react-dom-confetti";
 
 export const CandidateGroup = ({

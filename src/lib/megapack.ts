@@ -13,15 +13,15 @@ export default async function getMegapack(year: keyof typeof yearPack) {
     year,
     ...yearPack[year],
 
-    national: (await import(`@/assets/${yearCode}/national.json`))
+    national: (await import(`@/years/${yearCode}/national.json`))
       .default as NationalCandidatesType,
-    localMapping: (await import(`@/assets/${yearCode}/localMapping.json`))
+    localMapping: (await import(`@/years/${yearCode}/localMapping.json`))
       .default as CityMuni[],
     provincesCitiesMunicipalities: (
-      await import(`@/assets/${yearCode}/provincesCitiesMunicipalities.json`)
+      await import(`@/years/${yearCode}/provincesCitiesMunicipalities.json`)
     ).default as ProvincesCitiesMunicipalitiesType[],
     betterPositionMap: (
-      await import(`@/assets/${yearCode}/betterPositionMap.json`)
+      await import(`@/years/${yearCode}/betterPositionMap.json`)
     ).default as BetterPositionMapType[],
   };
 

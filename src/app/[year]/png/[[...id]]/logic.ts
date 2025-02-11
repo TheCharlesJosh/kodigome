@@ -1,5 +1,6 @@
 import { BASE_URL } from "@/lib/constants";
-import { readFile } from "node:fs/promises";
+// import { readFile } from "node:fs/promises";
+import fs from "fs-extra";
 import { join } from "node:path";
 import getMegapack, { isValidYear } from "@/lib/megapack";
 import { decodeForSharing } from "@/lib/for-sharing";
@@ -35,11 +36,11 @@ export const lineBreaker = (line: string, limit: number) => {
 export type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 export type Style = "normal" | "italic";
 
-export const EmptyInvalidKodigo = await readFile(
+export const EmptyInvalidKodigo = await fs.readFile(
   join(process.cwd(), "/public/images/error-kodigo-empty.png")
 );
 
-export const EmptyInvalidKodigoOG = await readFile(
+export const EmptyInvalidKodigoOG = await fs.readFile(
   join(process.cwd(), "/public/images/kodigo-me-meta.png")
 );
 
@@ -66,16 +67,16 @@ export const EmptyInvalidKodigoOG = await readFile(
  * Lesson learned: Do not use a variable font.
  */
 
-const InterBuffer = await readFile(
+const InterBuffer = await fs.readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-Regular.ttf")
 );
-const InterBoldBuffer = await readFile(
+const InterBoldBuffer = await fs.readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-Bold.ttf")
 );
-const InterSemiBoldBuffer = await readFile(
+const InterSemiBoldBuffer = await fs.readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-SemiBold.ttf")
 );
-const InterExtraBoldBuffer = await readFile(
+const InterExtraBoldBuffer = await fs.readFile(
   join(process.cwd(), "/src/app/[year]/png/[[...id]]/Inter-ExtraBold.ttf")
 );
 
@@ -174,8 +175,18 @@ export default async function processDataForImage(
       mapEntry.cityMunicipality === user?.["City/Municipality"]
   );
 
+  // const local: LocalCandidatesType = cityMuni
+  //   ? (
+  //       await import(
+  //         `@/../public/assets/${yearCode}/json/${cityMuni.identifier}.json`
+  //       )
+  //     ).default
+  //   : {};
+
   const local: LocalCandidatesType = cityMuni
-    ? (await import(`@/assets/${yearCode}/json/${cityMuni.identifier}`)).default
+    ? await fetch(
+        `${BASE_URL}/years/${yearCode}/${cityMuni.identifier}.json`
+      ).then((res) => res.json())
     : {};
 
   const nationalLocal = { ...national, ...local };

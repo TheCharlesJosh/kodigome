@@ -1,4 +1,4 @@
-import logo from "../assets/logo.svg";
+import logo from "@public/logo.svg";
 import Image from "next/image";
 import { ReactNode, RefObject } from "react";
 import { HiOutlineArrowDown, HiOutlineInformationCircle } from "react-icons/hi";

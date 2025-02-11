@@ -9,10 +9,7 @@ import { useBeforeUnload, useIntersection } from "react-use";
 import { encodeForSharing } from "@/lib/for-sharing";
 import { toast, ToastContainer } from "react-toastify";
 import { cn } from "@/lib/utils";
-
-const COLORS_BY_YEAR = ["primary-2025", "primary-2022"];
-const setPageColorByYear = (year: string) =>
-  COLORS_BY_YEAR.find((yearColor) => yearColor.includes(year));
+import { candidateGroup } from "@/lib/style-variants";
 
 export default function BallotPage({
   initialValues = {},
@@ -76,13 +73,14 @@ export default function BallotPage({
     }
   }, [error]);
 
-  const pageColorByYear = setPageColorByYear(megapack.year);
+  const { base } = candidateGroup({ oddEven: "odd", year: megapack.year });
+  const pageColorByYear = base();
 
   useEffect(() => {
     if (pageColorByYear) {
       document.body.classList.add(pageColorByYear);
     }
-    return () => document.body.classList.remove(...COLORS_BY_YEAR);
+    return () => document.body.classList.remove(pageColorByYear);
   }, [pageColorByYear]);
 
   return (
