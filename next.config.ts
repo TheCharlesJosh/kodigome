@@ -3,9 +3,6 @@ import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
-import path from "path";
-
-const __dirname = new URL(".", import.meta.url).pathname;
 
 const scriptSiteList: string[] = [];
 
@@ -36,6 +33,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "standalone",
   poweredByHeader: false,
+  // productionBrowserSourceMaps: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     localPatterns: [
@@ -125,22 +123,10 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  webpack(config) {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      "@": path.resolve(__dirname, "./src"),
-      "@publc": path.resolve(__dirname, "./public"),
-      "@lib": path.resolve(__dirname, "./src/lib"),
-      "@components": path.resolve(__dirname, "./src/components"),
-      "@/components": path.resolve(__dirname, "./src/components"),
-    };
-    // config.resolve.alias["@"] = path.resolve(__dirname, "src");
-    // config.resolve.alias["@public"] = path.resolve(__dirname, "public");
-    // config.resolve.alias["@lib"] = path.resolve(__dirname, "src/lib");
-    // config.resolve.alias["@components"] = path.resolve(
-    //   __dirname,
-    //   "src/components"
-    // );
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.devtool = "source-map";
+    }
     return config;
   },
 };

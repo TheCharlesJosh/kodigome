@@ -12,7 +12,7 @@ COPY patches ./patches
 
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then NODE_ENV=development npm install; \
+  elif [ -f package-lock.json ]; then npm ci --include=dev; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
@@ -24,8 +24,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Setup environment variables
-# ARG NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
-# ARG NEXT_PUBLIC_PRODUCTION=${NEXT_PUBLIC_PRODUCTION}
+ARG NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+ARG NEXT_PUBLIC_PRODUCTION=${NEXT_PUBLIC_PRODUCTION}
 
 ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
 ENV NEXT_PUBLIC_PRODUCTION=${NEXT_PUBLIC_PRODUCTION}
