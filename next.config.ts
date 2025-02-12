@@ -57,11 +57,11 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/png/:path*",
-        destination: "/2022/png",
+        destination: "/2022/png/:path*",
       },
       {
         source: "/api/og/:path*",
-        destination: "/2022/og",
+        destination: "/2022/og/:path*",
       },
     ];
   },
