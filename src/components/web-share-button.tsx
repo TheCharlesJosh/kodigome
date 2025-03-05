@@ -26,7 +26,7 @@ export const WebShareButton = ({
     shareData.files = [file];
 
     try {
-      if (!navigator.canShare(shareData)) {
+      if (!navigator.canShare || !navigator.canShare(shareData)) {
         throw new Error("Cannot share data: " + shareData);
       } else {
         await navigator.share(shareData);
@@ -36,7 +36,7 @@ export const WebShareButton = ({
     }
   };
 
-  if (navigator.canShare(shareData) && blob) {
+  if (navigator.canShare && navigator.canShare(shareData) && blob) {
     return (
       <HiDotsHorizontal
         className="-mt-px h-8 w-8 cursor-pointer rounded-full bg-gray-400 text-white"
